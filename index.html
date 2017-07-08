@@ -1,0 +1,4560 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Release and Security Feed</title>
+<style>.message{max-height: 500px;overflow: auto;border: solid 1px;padding: 10px;}</style>
+</head>
+<body>
+<h1>University of Wisconsin - Madison Sea Grant Institute GIS Software Release and Security Feed</h1>
+<h3>Feed to track releases and security updates for software used in the Sea Grant's GIS stack.</h3>
+<br>
+<em>Last updated: 2017-04-14 09:09</em>
+<br>
+<hr><br><br><h3 id="15b5c40410e9f255">Tread: 15b5c40410e9f255</h3></a>
+<em></em>
+<h4>[SECURITY] CVE-2017-5651 Apache Tomcat Information Disclosure</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Mark Thomas <markt@apache.org></p>
+<p class="message">CVE-2017-5651 Apache Tomcat Information Disclosure
+<br>
+
+<br>
+Severity: Important
+<br>
+
+<br>
+Vendor: The Apache Software Foundation
+<br>
+
+<br>
+Versions Affected:
+<br>
+Apache Tomcat 9.0.0.M1 to 9.0.0.M18
+<br>
+Apache Tomcat 8.5.0 to 8.5.12
+<br>
+Apache Tomcat 8.0.x and earlier are not affected
+<br>
+
+<br>
+Description:
+<br>
+The refactoring of the HTTP connectors for 8.5.x onwards, introduced a
+<br>
+regression in the send file processing. If the send file processing
+<br>
+completed quickly, it was possible for the Processor to be added to the
+<br>
+processor cache twice. This could result in the same Processor being
+<br>
+used for multiple requests which in turn could lead to unexpected errors
+<br>
+and/or response mix-up.
+<br>
+
+<br>
+Mitigation:
+<br>
+Users of the affected versions should apply one of the following
+<br>
+mitigations:
+<br>
+- Upgrade to Apache Tomcat 9.0.0.M19 or later
+<br>
+- Upgrade to Apache Tomcat 8.5.13 or later
+<br>
+
+<br>
+Credit:
+<br>
+This issue was reported publicly as Bug 60918 [1] and the security
+<br>
+implications identified by the Tomcat security team.
+<br>
+
+<br>
+History:
+<br>
+2017-04-10 Original advisory
+<br>
+
+<br>
+References:
+<br>
+[1] https://bz.apache.org/bugzilla/show_bug.cgi?id=60918
+<br>
+[2] http://tomcat.apache.org/security-9.html
+<br>
+[3] http://tomcat.apache.org/security-8.html
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b5c400fd6e0bae">Tread: 15b5c400fd6e0bae</h3></a>
+<em></em>
+<h4>[SECURITY] CVE-2017-5650 Apache Tomcat Denial of Service</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Mark Thomas <markt@apache.org></p>
+<p class="message">CVE-2017-5650 Apache Tomcat Denial of Service
+<br>
+
+<br>
+Severity: Important
+<br>
+
+<br>
+Vendor: The Apache Software Foundation
+<br>
+
+<br>
+Versions Affected:
+<br>
+Apache Tomcat 9.0.0.M1 to 9.0.0.M18
+<br>
+Apache Tomcat 8.5.0 to 8.5.12
+<br>
+Apache Tomcat 8.0.x and earlier are not affected
+<br>
+
+<br>
+Description
+<br>
+The handling of an HTTP/2 GOAWAY frame for a connection did not close
+<br>
+streams associated with that connection that were currently waiting for
+<br>
+a WINDOW_UPDATE before allowing the application to write more data.
+<br>
+These waiting streams each consumed a thread. A malicious client could
+<br>
+therefore construct a series of HTTP/2 requests that would consume all
+<br>
+available processing threads.
+<br>
+
+<br>
+Mitigation:
+<br>
+Users of the affected versions should apply one of the following
+<br>
+mitigations:
+<br>
+- Upgrade to Apache Tomcat 9.0.0.M19 or later
+<br>
+- Upgrade to Apache Tomcat 8.5.13 or later
+<br>
+
+<br>
+Credit:
+<br>
+This issue was identified by Chun Han Hsiao and reported responsibly to
+<br>
+the Tomcat security team.
+<br>
+
+<br>
+History:
+<br>
+2017-04-10 Original advisory
+<br>
+
+<br>
+References:
+<br>
+[1] http://tomcat.apache.org/security-9.html
+<br>
+[2] http://tomcat.apache.org/security-8.html
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b5c3fdd90554e3">Tread: 15b5c3fdd90554e3</h3></a>
+<em></em>
+<h4>[SECURITY] CVE-2017-5648 Apache Tomcat Information Disclosure</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Mark Thomas <markt@apache.org></p>
+<p class="message">CVE-2017-5648 Apache Tomcat Information Disclosure
+<br>
+
+<br>
+Severity: Low
+<br>
+
+<br>
+Vendor: The Apache Software Foundation
+<br>
+
+<br>
+Versions Affected:
+<br>
+Apache Tomcat 9.0.0.M1 to 9.0.0.M17
+<br>
+Apache Tomcat 8.5.0 to 8.5.11
+<br>
+Apache Tomcat 8.0.0.RC1 to 8.0.41
+<br>
+Apache Tomcat 7.0.0 to 7.0.75
+<br>
+Apache Tomcat 6.0.x is not affected
+<br>
+
+<br>
+Description
+<br>
+While investigating bug 60718, it was noticed that some calls to
+<br>
+application listeners did not use the appropriate facade object. When
+<br>
+running an untrusted application under a SecurityManager, it was
+<br>
+therefore possible for that untrusted application to retain a reference
+<br>
+to the request or response object and thereby access and/or modify
+<br>
+information associated with another web application.
+<br>
+
+<br>
+Mitigation:
+<br>
+Users of the affected versions should apply one of the following
+<br>
+mitigations:
+<br>
+- Upgrade to Apache Tomcat 9.0.0.M18 or later
+<br>
+- Upgrade to Apache Tomcat 8.5.12 or later
+<br>
+- Upgrade to Apache Tomcat 8.0.42 or later
+<br>
+- Upgrade to Apache Tomcat 7.0.76 or later
+<br>
+
+<br>
+Credit:
+<br>
+This issue was identified by the Tomcat security team.
+<br>
+
+<br>
+History:
+<br>
+2017-04-10 Original advisory
+<br>
+
+<br>
+References:
+<br>
+[1] https://bz.apache.org/bugzilla/show_bug.cgi?id=60718
+<br>
+[2] http://tomcat.apache.org/security-9.html
+<br>
+[3] http://tomcat.apache.org/security-8.html
+<br>
+[4] http://tomcat.apache.org/security-7.html
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b5c3faca8c32ef">Tread: 15b5c3faca8c32ef</h3></a>
+<em></em>
+<h4>[SECURITY] CVE-2017-5647 Apache Tomcat Information Disclosure</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Mark Thomas <markt@apache.org></p>
+<p class="message">CVE-2017-5647 Apache Tomcat Information Disclosure
+<br>
+
+<br>
+Severity: Important
+<br>
+
+<br>
+Vendor: The Apache Software Foundation
+<br>
+
+<br>
+Versions Affected:
+<br>
+Apache Tomcat 9.0.0.M1 to 9.0.0.M18
+<br>
+Apache Tomcat 8.5.0 to 8.5.12
+<br>
+Apache Tomcat 8.0.0.RC1 to 8.0.42
+<br>
+Apache Tomcat 7.0.0 to 7.0.76
+<br>
+Apache Tomcat 6.0.0 to 6.0.52
+<br>
+
+<br>
+Description
+<br>
+A bug in the handling of the pipelined requests when send file was used
+<br>
+resulted in the pipelined request being lost when send file processing
+<br>
+of the previous request completed. This could result in responses
+<br>
+appearing to be sent for the wrong request. For example, a user agent
+<br>
+that sent requests A, B and C could see the correct response for request
+<br>
+A, the response for request C for request B and no response for request C.
+<br>
+
+<br>
+Mitigation:
+<br>
+Users of the affected versions should apply one of the following
+<br>
+mitigations:
+<br>
+- Switch to the BIO HTTP where available
+<br>
+- Disable send file
+<br>
+- Upgrade to Apache Tomcat 9.0.0.M19 or later
+<br>
+- Upgrade to Apache Tomcat 8.5.13 or later
+<br>
+- Upgrade to Apache Tomcat 8.0.43 or later
+<br>
+- Upgrade to Apache Tomcat 7.0.77 or later
+<br>
+- Upgrade to Apache Tomcat 6.0.53 or later
+<br>
+
+<br>
+Credit:
+<br>
+This issue was identified by the Tomcat security team.
+<br>
+
+<br>
+History:
+<br>
+2017-04-10 Original advisory
+<br>
+
+<br>
+References:
+<br>
+[1] http://tomcat.apache.org/security-9.html
+<br>
+[2] http://tomcat.apache.org/security-8.html
+<br>
+[3] http://tomcat.apache.org/security-7.html
+<br>
+[4] http://tomcat.apache.org/security-6.html
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b5971caae43075">Tread: 15b5971caae43075</h3></a>
+<em>Mon, 10 Apr 2017 15:46:57 -0400</em>
+<h4>[ANNOUNCE] pg_partman v3.0.1 released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Keith <keith@keithf4.com></p>
+<p class="message"><div dir=3D"ltr"><div><div><div>Version 3.0.1 of PG Partition Manager, the =
+<br>
+first in the v3 series, has been released. This version contains initial su=
+<br>
+pport for native partitioning in the upcoming PostgreSQL 10 release. Native=
+<br>
+ partitioning is still experimental at this point, but this release is bein=
+<br>
+g done now to encourage testing and to make sure it still works smoothly al=
+<br>
+ong side the old, trigger-based method. Both methods will be supported whil=
+<br>
+e they each have their own, exclusive benefits.<br><br></div>Other changes =
+<br>
+include simplification of partitioning types (now automatically determines =
+<br>
+time or id based on partition column data type) as well as simplified autom=
+<br>
+atic maintenance. Automatic child table creation for serial partitioning ha=
+<br>
+s changed and no longer creates tables as part of the trigger code, so main=
+<br>
+tenance will now have to be scheduled for all partitioning types.<br><br></=
+<br>
+div>Many bugs have also been fixed, so please see the CHANGELOG for those a=
+<br>
+nd important upgrade information. Also check the updated documentation and =
+<br>
+howto guides. Thanks to all the users for feedback and support!<br><br><a h=
+<br>
+ref=3D"https://github.com/keithf4/pg_partman">https://github.com/keithf4/pg=
+<br>
+_partman</a><br><br></div>Keith Fiske<br><a href=3D"https://www.keithf4.com=
+<br>
+">https://www.keithf4.com</a><br><a href=3D"https://omniti.com">https://omn=
+<br>
+iti.com</a><br></div>
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b55f502e21bbd4">Tread: 15b55f502e21bbd4</h3></a>
+<em>Mon, 10 Apr 2017 11:42:45 +0800</em>
+<h4>Security.json file caused Solr to stop working</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Zheng Lin Edwin Yeo <edwinyeozl@gmail.com></p>
+<p class="message">Hi,
+<br>
+
+<br>
+I tried to implement the security.json using SolrCloud in Solr 6.4.2.
+<br>
+
+<br>
+However, after I upload the security.json to ZooKeeper, the Solr cannot
+<br>
+access any function at all. It also does not prompt to enter a User Name
+<br>
+and Password to login, as per what is expected.
+<br>
+
+<br>
+Why could this be the reason?
+<br>
+
+<br>
+Below is my security.json file, taken from the example in Solr. It does not
+<br>
+work even when the blockUnknown is set to false.
+<br>
+
+<br>
+
+<br>
+{
+<br>
+"authentication":{
+<br>
+   "blockUnknown": false,
+<br>
+   "class":"solr.BasicAuthPlugin",
+<br>
+   "credentials":{"solr":"IV0EHq1OnNrj6gvRCwvFwTrZ1+z1oBbnQdiVC3otuq0=
+<br>
+Ndd7LKvVBAaZIF0QAVi1ekCfAJXr1GGfLtRUXhgrF8c="}
+<br>
+},
+<br>
+"authorization":{
+<br>
+   "class":"solr.RuleBasedAuthorizationPlugin",
+<br>
+   "permissions":[{"name":"security-edit",
+<br>
+      "role":"admin"}]
+<br>
+   "user-role":{"solr":"admin"}
+<br>
+}}
+<br>
+
+<br>
+
+<br>
+Regards,
+<br>
+Edwin
+<br>
+</p>
+<br><br><br><br>
+<h4>Security.json file caused Solr to stop working</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Zheng Lin Edwin Yeo <edwinyeozl@gmail.com></p>
+<p class="message">This is the error message that I get.
+<br>
+
+<br>
+2017-04-10 08:30:05.766 ERROR (main) [   ] o.a.s.s.SolrDispatchFilter Could
+<br>
+not start Solr. Check solr/home property and the logs
+<br>
+2017-04-10 08:30:05.779 ERROR (main) [   ] o.a.s.c.SolrCore
+<br>
+null:java.lang.ClassCastException: java.lang.String cannot be cast to
+<br>
+java.util.Map
+<br>
+at
+<br>
+org.apache.solr.common.cloud.ZkStateReader.getSecurityProps(ZkStateReader.java:908)
+<br>
+at
+<br>
+org.apache.solr.common.cloud.ZkStateReader.createClusterStateWatchersAndUpdate(ZkStateReader.java:433)
+<br>
+at org.apache.solr.cloud.ZkController.init(ZkController.java:672)
+<br>
+at org.apache.solr.cloud.ZkController.<init>(ZkController.java:419)
+<br>
+at org.apache.solr.core.ZkContainer.initZooKeeper(ZkContainer.java:112)
+<br>
+at org.apache.solr.core.CoreContainer.load(CoreContainer.java:465)
+<br>
+at
+<br>
+org.apache.solr.servlet.SolrDispatchFilter.createCoreContainer(SolrDispatchFilter.java:235)
+<br>
+at
+<br>
+org.apache.solr.servlet.SolrDispatchFilter.init(SolrDispatchFilter.java:167)
+<br>
+at org.eclipse.jetty.servlet.FilterHolder.initialize(FilterHolder.java:137)
+<br>
+at
+<br>
+org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:873)
+<br>
+at
+<br>
+org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:349)
+<br>
+at
+<br>
+org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1404)
+<br>
+at
+<br>
+org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1366)
+<br>
+at
+<br>
+org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:778)
+<br>
+at
+<br>
+org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:262)
+<br>
+at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:520)
+<br>
+at
+<br>
+org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.bindings.StandardStarter.processBinding(StandardStarter.java:41)
+<br>
+at org.eclipse.jetty.deploy.AppLifeCycle.runBindings(AppLifeCycle.java:188)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.DeploymentManager.requestAppGoal(DeploymentManager.java:499)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.DeploymentManager.addApp(DeploymentManager.java:147)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.providers.ScanningAppProvider.fileAdded(ScanningAppProvider.java:180)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.providers.WebAppProvider.fileAdded(WebAppProvider.java:458)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.providers.ScanningAppProvider$1.fileAdded(ScanningAppProvider.java:64)
+<br>
+at org.eclipse.jetty.util.Scanner.reportAddition(Scanner.java:610)
+<br>
+at org.eclipse.jetty.util.Scanner.reportDifferences(Scanner.java:529)
+<br>
+at org.eclipse.jetty.util.Scanner.scan(Scanner.java:392)
+<br>
+at org.eclipse.jetty.util.Scanner.doStart(Scanner.java:313)
+<br>
+at
+<br>
+org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.providers.ScanningAppProvider.doStart(ScanningAppProvider.java:150)
+<br>
+at
+<br>
+org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.DeploymentManager.startAppProvider(DeploymentManager.java:561)
+<br>
+at
+<br>
+org.eclipse.jetty.deploy.DeploymentManager.doStart(DeploymentManager.java:236)
+<br>
+at
+<br>
+org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+<br>
+at
+<br>
+org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:131)
+<br>
+at org.eclipse.jetty.server.Server.start(Server.java:422)
+<br>
+at
+<br>
+org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:113)
+<br>
+at
+<br>
+org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+<br>
+at org.eclipse.jetty.server.Server.doStart(Server.java:389)
+<br>
+at
+<br>
+org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+<br>
+at org.eclipse.jetty.xml.XmlConfiguration$1.run(XmlConfiguration.java:1516)
+<br>
+at java.security.AccessController.doPrivileged(Native Method)
+<br>
+at org.eclipse.jetty.xml.XmlConfiguration.main(XmlConfiguration.java:1441)
+<br>
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br>
+at
+<br>
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br>
+at
+<br>
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br>
+at java.lang.reflect.Method.invoke(Method.java:498)
+<br>
+at org.eclipse.jetty.start.Main.invokeMain(Main.java:214)
+<br>
+at org.eclipse.jetty.start.Main.start(Main.java:457)
+<br>
+at org.eclipse.jetty.start.Main.main(Main.java:75)
+<br>
+
+<br>
+
+<br>
+Regards,
+<br>
+Edwin
+<br>
+
+<br>
+On 10 April 2017 at 11:42, Zheng Lin Edwin Yeo <edwinyeozl@gmail.com> wrote:
+<br>
+
+<br>
+> Hi,
+<br>
+>
+<br>
+> I tried to implement the security.json using SolrCloud in Solr 6.4.2.
+<br>
+>
+<br>
+> However, after I upload the security.json to ZooKeeper, the Solr cannot
+<br>
+> access any function at all. It also does not prompt to enter a User Name
+<br>
+> and Password to login, as per what is expected.
+<br>
+>
+<br>
+> Why could this be the reason?
+<br>
+>
+<br>
+> Below is my security.json file, taken from the example in Solr. It does
+<br>
+> not work even when the blockUnknown is set to false.
+<br>
+>
+<br>
+>
+<br>
+> {
+<br>
+> "authentication":{
+<br>
+>    "blockUnknown": false,
+<br>
+>    "class":"solr.BasicAuthPlugin",
+<br>
+>    "credentials":{"solr":"IV0EHq1OnNrj6gvRCwvFwTrZ1+z1oBbnQdiVC3otuq0=
+<br>
+> Ndd7LKvVBAaZIF0QAVi1ekCfAJXr1GGfLtRUXhgrF8c="}
+<br>
+> },
+<br>
+> "authorization":{
+<br>
+>    "class":"solr.RuleBasedAuthorizationPlugin",
+<br>
+>    "permissions":[{"name":"security-edit",
+<br>
+>       "role":"admin"}]
+<br>
+>    "user-role":{"solr":"admin"}
+<br>
+> }}
+<br>
+>
+<br>
+>
+<br>
+> Regards,
+<br>
+> Edwin
+<br>
+>
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b3f9e853b6883d">Tread: 15b3f9e853b6883d</h3></a>
+<em>Wed, 5 Apr 2017 14:36:40 -0500</em>
+<h4>[ANNOUNCE] Apache Solr Reference Guide for Solr 6.5 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Cassandra Targett <ctargett@apache.org></p>
+<p class="message">The Lucene PMC is pleased to announce that the Solr Reference Guide
+<br>
+for Solr 6.5 has been released.
+<br>
+
+<br>
+This 782-page PDF is the definitive guide to using Apache Solr, the
+<br>
+search server built on Apache Lucene.
+<br>
+
+<br>
+The Guide can be downloaded from:
+<br>
+
+<br>
+https://www.apache.org/dyn/closer.cgi/lucene/solr/ref-guide/apache-solr-ref-guide-6.5.pdf
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b34c233c9e5d31">Tread: 15b34c233c9e5d31</h3></a>
+<em>Mon, 3 Apr 2017 19:48:36 +0300</em>
+<h4>[ANN] Apache Tomcat 7.0.77 released</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Violeta Georgieva <violetagg@apache.org></p>
+<p class="message"><div dir=3D"ltr">The Apache Tomcat team announces the immediate availabilit=
+<br>
+y of Apache<br>Tomcat 7.0.77.<br><br>Apache Tomcat is an open source softwa=
+<br>
+re implementation of the Java<br>Servlet, JavaServer Pages, Java Expression=
+<br>
+ Language and Java<br>WebSocket technologies.<br><br>This release contains =
+<br>
+a number of bug fixes and improvements compared to<br>version 7.0.76.<br><b=
+<br>
+r><div>Please refer to the change log for the complete list of changes:<br>=
+<br>
+<a href=3D"http://tomcat.apache.org/tomcat-7.0-doc/changelog.html">http://t=
+<br>
+omcat.apache.org/tomcat-7.0-doc/changelog.html</a><br><br>Downloads:<br><a =
+<br>
+href=3D"http://tomcat.apache.org/download-70.cgi">http://tomcat.apache.org/=
+<br>
+download-70.cgi</a><br><br>Migration guides from Apache Tomcat 5.5.x and 6.=
+<br>
+0.x:<br><a href=3D"http://tomcat.apache.org/migration.html">http://tomcat.a=
+<br>
+pache.org/migration.html</a><br><br>Enjoy<br><br>The Apache Tomcat team<br>=
+<br>
+</div></div>
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15b0ef3db91f36fd">Tread: 15b0ef3db91f36fd</h3></a>
+<em>Mon, 27 Mar 2017 10:48:26 +0200</em>
+<h4>[ANNOUNCE] Apache Solr 6.5.0 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		jim ferenczi <jim.ferenczi@gmail.com></p>
+<p class="message">27 March 2017, Apache Solr 6.5.0 available
+<br>
+
+<br>
+The Lucene PMC is pleased to announce the release of Apache Solr 6.5.0.
+<br>
+
+<br>
+Solr is the popular, blazing fast, open source NoSQL search platform from
+<br>
+the Apache Lucene project. Its major features include powerful full-text
+<br>
+search, hit highlighting, faceted search and analytics, rich document
+<br>
+parsing, geospatial search, extensive REST APIs as well as parallel SQL.
+<br>
+Solr is enterprise grade, secure and highly scalable, providing fault
+<br>
+tolerant distributed search and indexing, and powers the search and
+<br>
+navigation features of many of the world's largest internet sites.
+<br>
+
+<br>
+Solr 6.5.0 is available for immediate download at:
+<br>
+
+<br>
+   -
+<br>
+
+<br>
+   http://lucene.apache.org/solr/mirrors-solr-latest-redir.html
+<br>
+
+<br>
+Please read CHANGES.txt for a full list of new features and changes:
+<br>
+
+<br>
+   -
+<br>
+
+<br>
+   https://lucene.apache.org/solr/6_5_0/changes/Changes.html
+<br>
+
+<br>
+Highlights of this Solr release include:
+<br>
+
+<br>
+   - PointFields (fixed-width multi-dimensional numeric & binary types
+<br>
+   enabling fast range search) are now supported
+<br>
+   - In-place updates to numeric docValues fields (single valued,
+<br>
+   non-stored, non-indexed) supported using atomic update syntax
+<br>
+   - A new LatLonPointSpatialField that uses points or doc values for query
+<br>
+   - It is now possible to declare a field as "large" in order to bypass
+<br>
+   the document cache
+<br>
+   - New sow=false request param (split-on-whitespace) for edismax &
+<br>
+   standard query parsers enables query-time multi-term synonyms
+<br>
+   - XML QueryParser (defType=xmlparser) now supports span queries
+<br>
+   - hl.maxAnalyzedChars now have consistent default across highlighters
+<br>
+   - UnifiedSolrHighlighter and PostingsSolrHighlighter now support
+<br>
+   CustomSeparatorBreakIterator
+<br>
+   - Scoring formula is adjusted for the scoreNodes function
+<br>
+   - Calcite Planner now applies constant Reduction Rules to optimize plans
+<br>
+   - A new significantTerms Streaming Expression that is able to extract
+<br>
+   the significant terms in an index
+<br>
+   - StreamHandler is now able to use runtimeLib jars
+<br>
+   - Arithmetic operations are added to the SelectStream
+<br>
+   - Added modernized self-documenting /v2 API
+<br>
+   - The .system collection is now created on first request if it does not
+<br>
+   exist
+<br>
+   - Admin UI: Added shard deletion button
+<br>
+   - Metrics API now supports non-numeric metrics (version, disk type,
+<br>
+   component state, system properties...)
+<br>
+   - The disk free and aggregated disk free metrics are now reported
+<br>
+   - The DirectUpdateHandler2 now implements MetricsProducer and exposes
+<br>
+   stats via the metrics api and configured reporters.
+<br>
+   - BlockCache is faster due to less failures when caching a new block
+<br>
+   - MMapDirectoryFactory now supports "preload" option to ask mapped pages
+<br>
+   to be loaded into physical memory on init
+<br>
+   - Security: BasicAuthPlugin now supports standalone mode
+<br>
+   - Arbitrary java system properties can be passed to zkcli
+<br>
+   - SolrHttpClientBuilder can be configured via java system property
+<br>
+   - Javadocs and Changes.html are no longer included in the binary
+<br>
+   distribution, but are hosted online
+<br>
+
+<br>
+Further details of changes are available in the change log available at:
+<br>
+http://lucene.apache.org/solr/6_5_0/changes/Changes.html
+<br>
+
+<br>
+Please report any feedback to the mailing lists (http://lucene.apache.org/
+<br>
+solr/discussion.html)
+<br>
+Note: The Apache Software Foundation uses an extensive mirroring network
+<br>
+for distributing releases. It is possible that the mirror you are using may
+<br>
+not have replicated the release yet. If that is the case, please try
+<br>
+another mirror. This also applies to Maven access.
+<br>
+
+<br>
+   -
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15afcb7478e54bca">Tread: 15afcb7478e54bca</h3></a>
+<em>Thu, 23 Mar 2017 12:49:01 -0700</em>
+<h4>[ANNOUNCE] Apache Gora 0.7 Release</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		lewis john mcgibbney <lewismc@apache.org></p>
+<p class="message">Hi Folks,
+<br>
+
+<br>
+The Apache Gora team are pleased to announce the immediate availability of
+<br>
+Apache Gora 0.7.
+<br>
+The Apache Gora open source framework provides an in-memory data model and
+<br>
+persistence for big data. Gora supports persisting to column stores, key
+<br>
+value stores, document stores and RDBMSs, and analyzing the data with
+<br>
+extensive Apache Hadoop=E2=84=A2 MapReduce support.
+<br>
+
+<br>
+The Gora DOAP can be found at http://gora.apache.org/current/doap_Gora.rdf
+<br>
+
+<br>
+This release addresses 80 issues, for a breakdown please see the release
+<br>
+report <https://s.apache.org/YrmC>. Drop by our mailing lists and ask
+<br>
+questions for information on any of the above.
+<br>
+
+<br>
+Gora 0.7 provides support for the following projects
+<br>
+
+<br>
+   - Apache Avro <http://avro.apache.org> 1.8.1
+<br>
+   - Apache Hadoop <http://hadoop.apache.org> 2.5.2
+<br>
+   - Apache HBase <http://hbase.apache.org> 1.2.3
+<br>
+   - Apache Cassandra <http://cassandra.apache.org> 2.0.2
+<br>
+   - Apache Solr <http://lucene.apache.org/solr> 5.5.1
+<br>
+   - MongoDB <http://mongodb.com> (driver) 3.4.2
+<br>
+   - Apache Accumlo <http://accumulo.apache.org> 1.7.1
+<br>
+   - Apache Spark <http://spark.apache.org> 1.4.1
+<br>
+   - Apache CouchDB <http://couch.apache.org> 1.4.2 (test containers
+<br>
+   <http://testcontainers.viewdocs.io/testcontainers-java/> 1.1.0)
+<br>
+   - Amazon DynamoDB <https://aws.amazon.com/dynamodb/> (driver) 1.10.55
+<br>
+   - Infinispan <http://infinispan.org/> 7.2.5.Final
+<br>
+   - JCache <https://www.jcp.org/en/jsr/detail?id=3D107> 1.0.0 with Hazelca=
+<br>
+st
+<br>
+   <https://hazelcast.com/> 3.6.4 support.
+<br>
+
+<br>
+Gora is released as both source code, downloads for which can be found at
+<br>
+our downloads page <http://gora.apache.org/downloads.html>, as well as
+<br>
+Maven artifacts which can be found on Maven central
+<br>
+<http://search.maven.org/#search%7Cga%7C1%7Cgora>.
+<br>
+Thanks
+<br>
+
+<br>
+
+<br>
+--=20
+<br>
+http://home.apache.org/~lewismc/
+<br>
+@hectorMcSpector
+<br>
+http://www.linkedin.com/in/lmcgibbney
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15afb76e631e5fdc">Tread: 15afb76e631e5fdc</h3></a>
+<em>Thu, 23 Mar 2017 14:51:58 +0100</em>
+<h4>[ANNOUNCE] postgresql-unit 3 released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Christoph Berg <christoph.berg@credativ.de></p>
+<p class="message">-----BEGIN PGP SIGNATURE-----
+<br>
+
+<br>
+iQIzBAABCAAdFiEEXEj+YVf0kXlZcIfGTFprqxLSp64FAljT0v0ACgkQTFprqxLS
+<br>
+p64J3w//YYBvolKbiFRkDxwXlR7m1wseyRuIZb9mZKqRg3zp4mnN/wOFNi+MNhyK
+<br>
+DYH4kGTxWS2mwLckKGba6sNd74sgc3DtXdde4ypk/5a3MTEbTeR7qVAxkjVqGzt1
+<br>
+n95zN5yb8kpQU+87IHIB9pTVFsewfVrW8EvSlVjplk9zLBbT1u9yX6iQnAeaCXNT
+<br>
+Ld1u9jaIIXl1IT2TttccDjEddt/lQ4wXftaIUyu1YeY8cuiFojN3NvSlSewIVQfS
+<br>
+wtSX/+zx24u6/GX1L3YDxFW3yVsAEPGgfqP5JoMEDA0Bcyy5mqzq/rWCfxf2gX0k
+<br>
+itdst/HcgtL7d7HPykSFVlrWX0Q7sssRUPOw/taIA0+aLvhj1vDxaFOzuhzchSUI
+<br>
+IAz3s6Tc/gom8bvprGfayeCy2BlD1itBhrcun8yI71TRXDIgIoP2zliVZV77sIFX
+<br>
++V1x+Munkao8OdiBEsP9+yXYyti/EpS9TnjmlsJ3mdIBR9AIfuoay8HwXp67/5g6
+<br>
+WKUkmPvAiSHpicRjgg+Ec8IT0m9n0EuUEGl4ICXDbiipAGLuacsV6bLaYoMaGshj
+<br>
+XpstI/YiYKWj4x972FTQIZWd/rYDq9x5vpHKLyMhx4TBGElKFZMWlfBdr95NnOeM
+<br>
+TwrOXt7Snru0gcW62r5561lVYl76Abaq3Y88SL9cEPvRCtE9BkM=
+<br>
+=2rIs
+<br>
+-----END PGP SIGNATURE-----
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15adca1f5f6194a8">Tread: 15adca1f5f6194a8</h3></a>
+<em></em>
+<h4>[ANN] Apache Tomcat 7.0.76 released</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Mark Thomas <markt@apache.org></p>
+<p class="message">The Apache Tomcat team announces the immediate availability of Apache
+<br>
+Tomcat 7.0.76.
+<br>
+
+<br>
+Apache Tomcat is an open source software implementation of the Java
+<br>
+Servlet, JavaServer Pages, Java Expression Language and Java
+<br>
+WebSocket technologies.
+<br>
+
+<br>
+This release contains a number of bug fixes and improvements compared to
+<br>
+version 7.0.75. The notable changes since 7.0.75 include:
+<br>
+
+<br>
+- Limited relaxation of the HTTP request line validation
+<br>
+
+<br>
+- Support for Java 9 during annotation scanning
+<br>
+
+<br>
+- Update Tomcat Native to 1.2.12 to pick up the latest Windows binaries
+<br>
+  built with OpenSSL 1.0.2k
+<br>
+
+<br>
+
+<br>
+Please refer to the change log for the complete list of changes:
+<br>
+http://tomcat.apache.org/tomcat-7.0-doc/changelog.html
+<br>
+
+<br>
+Downloads:
+<br>
+http://tomcat.apache.org/download-70.cgi
+<br>
+
+<br>
+Migration guides from Apache Tomcat 5.5.x and 6.0.x:
+<br>
+http://tomcat.apache.org/migration.html
+<br>
+
+<br>
+Enjoy
+<br>
+
+<br>
+The Apache Tomcat team
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15adb3f5957c4d38">Tread: 15adb3f5957c4d38</h3></a>
+<em>Fri, 17 Mar 2017 16:35:28 +0900</em>
+<h4>[ANNOUNCE] Pgpool-II 3.6.2, 3.5.6, 3.4.10, 3.3.14 and 3.2.19 are now officially released.</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Bo Peng <pengbo@sraoss.co.jp></p>
+<p class="message">Pgpool-II is a tool to add usefull features to PostgreSQL, including
+<br>
+connection pooling, load balancing, automatic fail over and more.
+<br>
+
+<br>
+Pgpool Global Development Group is pleased to announce the availability
+<br>
+of Pgpool-II 3.6.2, 3.5.6, 3.4.10, 3.3.14 and 3.2.19. These are the latest 
+<br>
+stable minor versions of each major versions of Pgpool-II. 
+<br>
+
+<br>
+Release notes for versions prior 3.6 are no longer included in the
+<br>
+source code. Please take a look at this:
+<br>
+
+<br>
+  http://www.pgpool.net/docs/latest/en/html/release.html
+<br>
+
+<br>
+You can download the source code, installer, RPMs from:
+<br>
+
+<br>
+  http://pgpool.net/mediawiki/index.php/Downloads
+<br>
+
+<br>
+-- 
+<br>
+
+<br>
+-- 
+<br>
+Bo Peng <pengbo@sraoss.co.jp>
+<br>
+SRA OSS, Inc. Japan
+<br>
+
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15ad1530099b84b4">Tread: 15ad1530099b84b4</h3></a>
+<em>Wed, 15 Mar 2017 02:19:47 -0700 (MST)</em>
+<h4>org.apache.solr.security.RuleBasedAuthorizationPlugin messages</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		moscovig <moscovig@gmail.com></p>
+<p class="message">Hi
+<br>
+We have solr server 6.2.1 with basic auth (rule based). 
+<br>
+Clients are using solrj 6.2.
+<br>
+
+<br>
+During heavy workload we see that besides some timeouts, we also get the
+<br>
+next messages:
+<br>
+
+<br>
+org.apache.solr.security.RuleBasedAuthorizationPlugin messages : request has
+<br>
+come without principal. failed permission {   "name":"*core-admin-read* 
+<br>
+.....
+<br>
+
+<br>
+We have them in batches of 5 per minute,
+<br>
+and 95% of the messages some from the *overseer* host.
+<br>
+which also hosts most of the leaders in the cluster.
+<br>
+
+<br>
+We have a 6 nodes cluster. 
+<br>
+
+<br>
+It is unlikely that someone is sending unauthorized requests to the cluster.
+<br>
+We don't see any "Response code: 401" messages from solr client services.
+<br>
+
+<br>
+So the question is what's happening to the authorization mechanism?
+<br>
+Does heavy workload might cause the mechanism to block valid requests?
+<br>
+Does it relate to the Overseer in some way? Does the Overseer play any role
+<br>
+in the authorization procedure?
+<br>
+
+<br>
+Thanks
+<br>
+Gilad
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+--
+<br>
+View this message in context: http://lucene.472066.n3.nabble.com/org-apache-solr-security-RuleBasedAuthorizationPlugin-messages-tp4325061.html
+<br>
+Sent from the Solr - User mailing list archive at Nabble.com.
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15ac949f4fbf3bb5">Tread: 15ac949f4fbf3bb5</h3></a>
+<em></em>
+<h4>[SECURITY] CVE-2016-8747 Apache Tomcat Information Disclosure</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Mark Thomas <markt@apache.org></p>
+<p class="message">CVE-2016-8747 Apache Tomcat Information Disclosure
+<br>
+
+<br>
+Severity: Moderate
+<br>
+
+<br>
+Vendor: The Apache Software Foundation
+<br>
+
+<br>
+Versions Affected:
+<br>
+Apache Tomcat 9.0.0.M11 to 9.0.0.M15
+<br>
+Apache Tomcat 8.5.7 to 8.5.9
+<br>
+
+<br>
+Description
+<br>
+The refactoring to make wider use of ByteBuffer introduced a regression
+<br>
+that could cause information to leak between requests on the same
+<br>
+connection. When running behind a reverse proxy, this could result in
+<br>
+information leakage between users. All HTTP connector variants are
+<br>
+affected but HTTP/2 and AJP are not affected.
+<br>
+
+<br>
+Mitigation:
+<br>
+Users of the affected versions should apply one of the following
+<br>
+mitigations:
+<br>
+- Upgrade to Apache Tomcat 9.0.0.M17 or later
+<br>
+  (Apache Tomcat 9.0.0.M16 has the fix but was not released)
+<br>
+- Upgrade to Apache Tomcat 8.5.11 or later
+<br>
+  (Apache Tomcat 8.5.10 has the fix but was not released)
+<br>
+Earlier versions are not affected
+<br>
+
+<br>
+Credit:
+<br>
+This issue was identified by the Tomcat security team.
+<br>
+
+<br>
+History:
+<br>
+2017-03-13 Original advisory
+<br>
+
+<br>
+References:
+<br>
+[1] http://tomcat.apache.org/security-9.html
+<br>
+[2] http://tomcat.apache.org/security-8.html
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15ac79bf72c24bc4">Tread: 15ac79bf72c24bc4</h3></a>
+<em>Mon, 13 Mar 2017 11:44:21 +0000</em>
+<h4>[ANNOUNCE] Psycopg 2.7.1 released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Daniele Varrazzo <daniele.varrazzo@gmail.com></p>
+<p class="message">A quick bugfix release to solve some teething problems with some of the
+<br>
+changes introduced in 2.7:
+<br>
+
+<br>
+- Ignore None arguments passed to connect() and make_dsn() (ticket #517).
+<br>
+- OpenSSL upgraded from major version 0.9.8 to 1.0.2 in the Linux
+<br>
+  wheel packages (ticket #518).
+<br>
+- Fixed build with libpq versions < 9.3 (ticket #520).
+<br>
+
+<br>
+Code fresh to grab at:
+<br>
+
+<br>
+- source package:
+<br>
+http://initd.org/psycopg/tarballs/PSYCOPG-2-7/psycopg2-2.7.1.tar.gz
+<br>
+- signature: http://initd.org/psycopg/tarballs/PSYCOPG-2-7/psycopg2-2.7.1.tar.gz.asc
+<br>
+
+<br>
+Enjoy the release!
+<br>
+
+<br>
+
+<br>
+----
+<br>
+
+<br>
+Psycopg is the most popular PostgreSQL adapter for the Python
+<br>
+programming language. At its core it fully implements the Python DB
+<br>
+API 2.0 specifications. Several extensions allow access to many of the
+<br>
+features offered by PostgreSQL.
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15ab8feee55fd592">Tread: 15ab8feee55fd592</h3></a>
+<em>Sat, 11 Mar 2017 00:30:21 +0900 (JST)</em>
+<h4>[ANNOUNCE] psqlODBC 09.06.0200 Released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Hiroshi Saito <hiroshi@winpg.jp></p>
+<p class="message">Hi, all.
+<br>
+
+<br>
+We are release of psqlODBC 09.06.0200. this is a some bugfix release.
+<br>
+please see the notes at:
+<br>
+https://odbc.postgresql.org/docs/release.html
+<br>
+
+<br>
+psqlODBC may be downloaded from in source, Windows Installer,
+<br>
+merge module, and basic zip file formats.
+<br>
+
+<br>
+New Windows installer installs both 32-bit and 64-bit driver at once
+<br>
+on 64-bit OS. Both drivers may be needed on 64-bit OS because 32-bit
+<br>
+applications require 32-bit driver and 64-bit applications require
+<br>
+64-bit driver.
+<br>
+
+<br>
+Please post any bug reports to the  mailing list.
+<br>
+
+<br>
+I'd like to take this opportunity to thank all those involved with the
+<br>
+development, testing and bug fixing of the updated driver.
+<br>
+
+<br>
+We are grateful to the help of many peoples. Thanks!
+<br>
+
+<br>
+-- 
+<br>
+psqlODBC team.
+<br>
+email:   pgsql-odbc@postgresql.org
+<br>
+website: https://odbc.postgresql.org/
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15aaa421f2962ab5">Tread: 15aaa421f2962ab5</h3></a>
+<em>Wed, 8 Mar 2017 01:02:21 +0530</em>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">7 March 2017, Apache Solr 6.4.2 available
+<br>
+
+<br>
+Solr is the popular, blazing fast, open source NoSQL search platform from
+<br>
+the Apache Lucene project. Its major features include powerful full-text
+<br>
+search, hit highlighting, faceted search and analytics, rich document
+<br>
+parsing, geospatial search, extensive REST APIs as well as parallel SQL.
+<br>
+Solr is enterprise grade, secure and highly scalable, providing fault
+<br>
+tolerant distributed search and indexing, and powers the search and
+<br>
+navigation features of many of the world's largest internet sites.
+<br>
+
+<br>
+Solr 6.4.2 is available for immediate download at:
+<br>
+
+<br>
+   -
+<br>
+
+<br>
+   http://lucene.apache.org/solr/mirrors-solr-latest-redir.html
+<br>
+
+<br>
+Please read CHANGES.txt for a full list of new features and changes:
+<br>
+
+<br>
+   -
+<br>
+
+<br>
+   https://lucene.apache.org/solr/6_4_2/changes/Changes.html
+<br>
+
+<br>
+Solr 6.4.2 contains 4 bug fixes since the 6.4.1 release:
+<br>
+
+<br>
+   -
+<br>
+
+<br>
+   Serious performance degradation in Solr 6.4 due to the metrics
+<br>
+   collection. IndexWriter metrics collection turned off by default, directory
+<br>
+   level metrics collection completely removed (until a better design is
+<br>
+   found)
+<br>
+   -
+<br>
+
+<br>
+   Transaction log replay can hit an NullPointerException due to new
+<br>
+   Metrics code
+<br>
+   -
+<br>
+
+<br>
+   NullPointerException in CloudSolrClient when reading stale alias
+<br>
+   -
+<br>
+
+<br>
+   UnifiedHighlighter and PostingsHighlighter bug in PrefixQuery and
+<br>
+   TermRangeQuery for multi-byte text
+<br>
+
+<br>
+Further details of changes are available in the change log available at:
+<br>
+http://lucene.apache.org/solr/6_4_2/changes/Changes.html
+<br>
+
+<br>
+Please report any feedback to the mailing lists (http://lucene.apache.org/
+<br>
+solr/discussion.html)
+<br>
+Note: The Apache Software Foundation uses an extensive mirroring network
+<br>
+for distributing releases. It is possible that the mirror you are using may
+<br>
+not have replicated the release yet. If that is the case, please try
+<br>
+another mirror. This also applies to Maven access.
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<em>Could not load message. See uwsg.gis.software@gmail.com for message.</em>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">QWZ0ZXIgdXBncmFkaW5nIHRvIDYuNC4yIGZyb20gNi40LjEsIHdl4oCZdmUgc2VlbiByZXBsaWNh
+<br>
+dGlvbiB0aW1lIGZvciBhIDIwMGdiIGluZGV4IGRlY3JlYXNlIGZyb20gNDUgaG91cnMgdG8gMS41
+<br>
+IGhvdXJzLg0KDQo+IE9uIDcgTWFyIDIwMTcsIGF0IDIwOjMyLCBJc2hhbiBDaGF0dG9wYWRoeWF5
+<br>
+YSA8aXNoYW5AYXBhY2hlLm9yZz4gd3JvdGU6DQo+IA0KPiA3IE1hcmNoIDIwMTcsIEFwYWNoZSBT
+<br>
+b2xyIDYuNC4yIGF2YWlsYWJsZQ0KPiANCj4gU29sciBpcyB0aGUgcG9wdWxhciwgYmxhemluZyBm
+<br>
+YXN0LCBvcGVuIHNvdXJjZSBOb1NRTCBzZWFyY2ggcGxhdGZvcm0gZnJvbQ0KPiB0aGUgQXBhY2hl
+<br>
+IEx1Y2VuZSBwcm9qZWN0LiBJdHMgbWFqb3IgZmVhdHVyZXMgaW5jbHVkZSBwb3dlcmZ1bCBmdWxs
+<br>
+LXRleHQNCj4gc2VhcmNoLCBoaXQgaGlnaGxpZ2h0aW5nLCBmYWNldGVkIHNlYXJjaCBhbmQgYW5h
+<br>
+bHl0aWNzLCByaWNoIGRvY3VtZW50DQo+IHBhcnNpbmcsIGdlb3NwYXRpYWwgc2VhcmNoLCBleHRl
+<br>
+bnNpdmUgUkVTVCBBUElzIGFzIHdlbGwgYXMgcGFyYWxsZWwgU1FMLg0KPiBTb2xyIGlzIGVudGVy
+<br>
+cHJpc2UgZ3JhZGUsIHNlY3VyZSBhbmQgaGlnaGx5IHNjYWxhYmxlLCBwcm92aWRpbmcgZmF1bHQN
+<br>
+Cj4gdG9sZXJhbnQgZGlzdHJpYnV0ZWQgc2VhcmNoIGFuZCBpbmRleGluZywgYW5kIHBvd2VycyB0
+<br>
+aGUgc2VhcmNoIGFuZA0KPiBuYXZpZ2F0aW9uIGZlYXR1cmVzIG9mIG1hbnkgb2YgdGhlIHdvcmxk
+<br>
+J3MgbGFyZ2VzdCBpbnRlcm5ldCBzaXRlcy4NCj4gDQo+IFNvbHIgNi40LjIgaXMgYXZhaWxhYmxl
+<br>
+IGZvciBpbW1lZGlhdGUgZG93bmxvYWQgYXQ6DQo+IA0KPiAgIC0NCj4gDQo+ICAgaHR0cDovL2x1
+<br>
+Y2VuZS5hcGFjaGUub3JnL3NvbHIvbWlycm9ycy1zb2xyLWxhdGVzdC1yZWRpci5odG1sDQo+IA0K
+<br>
+PiBQbGVhc2UgcmVhZCBDSEFOR0VTLnR4dCBmb3IgYSBmdWxsIGxpc3Qgb2YgbmV3IGZlYXR1cmVz
+<br>
+IGFuZCBjaGFuZ2VzOg0KPiANCj4gICAtDQo+IA0KPiAgIGh0dHBzOi8vbHVjZW5lLmFwYWNoZS5v
+<br>
+cmcvc29sci82XzRfMi9jaGFuZ2VzL0NoYW5nZXMuaHRtbA0KPiANCj4gU29sciA2LjQuMiBjb250
+<br>
+YWlucyA0IGJ1ZyBmaXhlcyBzaW5jZSB0aGUgNi40LjEgcmVsZWFzZToNCj4gDQo+ICAgLQ0KPiAN
+<br>
+Cj4gICBTZXJpb3VzIHBlcmZvcm1hbmNlIGRlZ3JhZGF0aW9uIGluIFNvbHIgNi40IGR1ZSB0byB0
+<br>
+aGUgbWV0cmljcw0KPiAgIGNvbGxlY3Rpb24uIEluZGV4V3JpdGVyIG1ldHJpY3MgY29sbGVjdGlv
+<br>
+biB0dXJuZWQgb2ZmIGJ5IGRlZmF1bHQsIGRpcmVjdG9yeQ0KPiAgIGxldmVsIG1ldHJpY3MgY29s
+<br>
+bGVjdGlvbiBjb21wbGV0ZWx5IHJlbW92ZWQgKHVudGlsIGEgYmV0dGVyIGRlc2lnbiBpcw0KPiAg
+<br>
+IGZvdW5kKQ0KPiAgIC0NCj4gDQo+ICAgVHJhbnNhY3Rpb24gbG9nIHJlcGxheSBjYW4gaGl0IGFu
+<br>
+IE51bGxQb2ludGVyRXhjZXB0aW9uIGR1ZSB0byBuZXcNCj4gICBNZXRyaWNzIGNvZGUNCj4gICAt
+<br>
+DQo+IA0KPiAgIE51bGxQb2ludGVyRXhjZXB0aW9uIGluIENsb3VkU29sckNsaWVudCB3aGVuIHJl
+<br>
+YWRpbmcgc3RhbGUgYWxpYXMNCj4gICAtDQo+IA0KPiAgIFVuaWZpZWRIaWdobGlnaHRlciBhbmQg
+<br>
+UG9zdGluZ3NIaWdobGlnaHRlciBidWcgaW4gUHJlZml4UXVlcnkgYW5kDQo+ICAgVGVybVJhbmdl
+<br>
+UXVlcnkgZm9yIG11bHRpLWJ5dGUgdGV4dA0KPiANCj4gRnVydGhlciBkZXRhaWxzIG9mIGNoYW5n
+<br>
+ZXMgYXJlIGF2YWlsYWJsZSBpbiB0aGUgY2hhbmdlIGxvZyBhdmFpbGFibGUgYXQ6DQo+IGh0dHA6
+<br>
+Ly9sdWNlbmUuYXBhY2hlLm9yZy9zb2xyLzZfNF8yL2NoYW5nZXMvQ2hhbmdlcy5odG1sDQo+IA0K
+<br>
+PiBQbGVhc2UgcmVwb3J0IGFueSBmZWVkYmFjayB0byB0aGUgbWFpbGluZyBsaXN0cyAoaHR0cDov
+<br>
+L2x1Y2VuZS5hcGFjaGUub3JnLw0KPiBzb2xyL2Rpc2N1c3Npb24uaHRtbCkNCj4gTm90ZTogVGhl
+<br>
+IEFwYWNoZSBTb2Z0d2FyZSBGb3VuZGF0aW9uIHVzZXMgYW4gZXh0ZW5zaXZlIG1pcnJvcmluZyBu
+<br>
+ZXR3b3JrDQo+IGZvciBkaXN0cmlidXRpbmcgcmVsZWFzZXMuIEl0IGlzIHBvc3NpYmxlIHRoYXQg
+<br>
+dGhlIG1pcnJvciB5b3UgYXJlIHVzaW5nIG1heQ0KPiBub3QgaGF2ZSByZXBsaWNhdGVkIHRoZSBy
+<br>
+ZWxlYXNlIHlldC4gSWYgdGhhdCBpcyB0aGUgY2FzZSwgcGxlYXNlIHRyeQ0KPiBhbm90aGVyIG1p
+<br>
+cnJvci4gVGhpcyBhbHNvIGFwcGxpZXMgdG8gTWF2ZW4gYWNjZXNzLg0KDQo=
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">Caruana:
+<br>
+
+<br>
+Thanks for that info.
+<br>
+
+<br>
+Do you know offhand how that 1.5 hours compares to earlier versions?
+<br>
+I'm wondering if there is further work to be done here or are we back
+<br>
+to previous speeds.
+<br>
+
+<br>
+Thanks
+<br>
+Erick
+<br>
+
+<br>
+On Wed, Mar 8, 2017 at 4:30 AM, Caruana, Matthew <mcaruana@icij.org> wrote:
+<br>
+> After upgrading to 6.4.2 from 6.4.1, we=E2=80=99ve seen replication time =
+<br>
+for a 200gb index decrease from 45 hours to 1.5 hours.
+<br>
+>
+<br>
+>> On 7 Mar 2017, at 20:32, Ishan Chattopadhyaya <ishan@apache.org> wrote:
+<br>
+>>
+<br>
+>> 7 March 2017, Apache Solr 6.4.2 available
+<br>
+>>
+<br>
+>> Solr is the popular, blazing fast, open source NoSQL search platform fro=
+<br>
+m
+<br>
+>> the Apache Lucene project. Its major features include powerful full-text
+<br>
+>> search, hit highlighting, faceted search and analytics, rich document
+<br>
+>> parsing, geospatial search, extensive REST APIs as well as parallel SQL.
+<br>
+>> Solr is enterprise grade, secure and highly scalable, providing fault
+<br>
+>> tolerant distributed search and indexing, and powers the search and
+<br>
+>> navigation features of many of the world's largest internet sites.
+<br>
+>>
+<br>
+>> Solr 6.4.2 is available for immediate download at:
+<br>
+>>
+<br>
+>>   -
+<br>
+>>
+<br>
+>>   http://lucene.apache.org/solr/mirrors-solr-latest-redir.html
+<br>
+>>
+<br>
+>> Please read CHANGES.txt for a full list of new features and changes:
+<br>
+>>
+<br>
+>>   -
+<br>
+>>
+<br>
+>>   https://lucene.apache.org/solr/6_4_2/changes/Changes.html
+<br>
+>>
+<br>
+>> Solr 6.4.2 contains 4 bug fixes since the 6.4.1 release:
+<br>
+>>
+<br>
+>>   -
+<br>
+>>
+<br>
+>>   Serious performance degradation in Solr 6.4 due to the metrics
+<br>
+>>   collection. IndexWriter metrics collection turned off by default, dire=
+<br>
+ctory
+<br>
+>>   level metrics collection completely removed (until a better design is
+<br>
+>>   found)
+<br>
+>>   -
+<br>
+>>
+<br>
+>>   Transaction log replay can hit an NullPointerException due to new
+<br>
+>>   Metrics code
+<br>
+>>   -
+<br>
+>>
+<br>
+>>   NullPointerException in CloudSolrClient when reading stale alias
+<br>
+>>   -
+<br>
+>>
+<br>
+>>   UnifiedHighlighter and PostingsHighlighter bug in PrefixQuery and
+<br>
+>>   TermRangeQuery for multi-byte text
+<br>
+>>
+<br>
+>> Further details of changes are available in the change log available at:
+<br>
+>> http://lucene.apache.org/solr/6_4_2/changes/Changes.html
+<br>
+>>
+<br>
+>> Please report any feedback to the mailing lists (http://lucene.apache.or=
+<br>
+g/
+<br>
+>> solr/discussion.html)
+<br>
+>> Note: The Apache Software Foundation uses an extensive mirroring network
+<br>
+>> for distributing releases. It is possible that the mirror you are using =
+<br>
+may
+<br>
+>> not have replicated the release yet. If that is the case, please try
+<br>
+>> another mirror. This also applies to Maven access.
+<br>
+>
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<em>Could not load message. See uwsg.gis.software@gmail.com for message.</em>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">During the replication, check the disk, network, and CPU utilization. =
+<br>
+One of them is the bottleneck.
+<br>
+
+<br>
+If the disk is at 100%, you are OK. If the network is at 100%, you are =
+<br>
+OK. If neither of them is at 100% and there is lots of CPU used (up to =
+<br>
+100% of one core), then Solr is the bottleneck and it needs more =
+<br>
+performance work.
+<br>
+
+<br>
+We are using New Relic for monitoring. That makes this sort of check =
+<br>
+very easy.
+<br>
+
+<br>
+wunder
+<br>
+Walter Underwood
+<br>
+wunder@wunderwood.org
+<br>
+http://observer.wunderwood.org/  (my blog)
+<br>
+
+<br>
+> On Mar 8, 2017, at 8:24 AM, Shawn Heisey <apache@elyograg.org> wrote:
+<br>
+>=20
+<br>
+> On 3/8/2017 5:30 AM, Caruana, Matthew wrote:
+<br>
+>> After upgrading to 6.4.2 from 6.4.1, we=E2=80=99ve seen replication =
+<br>
+time for a
+<br>
+>> 200gb index decrease from 45 hours to 1.5 hours.=20
+<br>
+>=20
+<br>
+> Just to check how long it takes to move a large amount of data over a
+<br>
+> network, I started a copy of a 32GB directory over a 100Mb/s network
+<br>
+> using a Windows client and a Samba server.  It said it would take 50
+<br>
+> minutes.  At this rate, copying 200GB would take over five hours.  =
+<br>
+This
+<br>
+> is quite a bit longer than I expected, but I hadn't done the math to
+<br>
+> check transfer rate against size.
+<br>
+>=20
+<br>
+> Assuming that you actually intended to use the word "replication" =
+<br>
+there
+<br>
+> (and not something like "rebuild"), this tells me that your network is
+<br>
+> considerably faster than 100 megabits per second, probably gigabit, =
+<br>
+and
+<br>
+> that the bottleneck is the speed of the disks.
+<br>
+>=20
+<br>
+> I see a previous thread where you asked about optimization =
+<br>
+performance,
+<br>
+> so it sounds like you are optimizing the master index which causes a
+<br>
+> full replication to slaves.  This is one of the reasons that
+<br>
+> optimization is generally not recommended except on very small indexes
+<br>
+> or indexes that do not change very often.
+<br>
+>=20
+<br>
+> Thanks,
+<br>
+> Shawn
+<br>
+>=20
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">SGkgU2hhd24sDQoNClRoZXNlIGFyZSB0aGUgZmFjdHM6DQoNCldpdGggU29sciA2LjQuMSwgd2Ug
+<br>
+c3RhcnRlZCB0aGUgb3B0aW1pc2F0aW9uIG9mIGEgMjAwZ2IgaW5kZXggd2l0aCA2NyBzZWdtZW50
+<br>
+cy4gVGhpcyBkaWQgbm90IHRyaWdnZXIgcmVwbGljYXRpb24uIEl0IHRvb2sgYSBmZXcgZGF5cy4g
+<br>
+V2UgY29uZmlybWVkIHRoYXQgdGhlIGJvdHRsZW5lY2sgd2FzIHRoZSBDUFUgKG9wdGltaXNhdGlv
+<br>
+biBpcyBub3QgcGFyYWxsZWxpc2VkKS4NCg0KV2UgbWFudWFsbHkgdHJpZ2dlcmVkIHJlcGxpY2F0
+<br>
+aW9uIG9mIHRoZSBvcHRpbWlzZWQgaW5kZXggdG8gYW5vdGhlciBTb2xyIDYuNC4xIGluc3RhbmNl
+<br>
+LCBvdmVyIGEgZ2lnYWJpdCBMQU4uIFRoaXMgdG9vayA0NSBob3VycyBiZWZvcmUgZmFpbGluZyBv
+<br>
+biB0aGUgZmluYWwgZmlsZSAodGhlIHNjaGVtYSkuDQoNCldlIHVwZ3JhZGVkIGJvdGggaW5zdGFu
+<br>
+Y2VzIHRvIDYuNC4yIGFuZCBzdGFydGVkIHJlcGxpY2F0aW9uIGFnYWluLiBUaGlzIHRvb2sgYWJv
+<br>
+dXQgMS41IGhvdXJzLiBTYW1lIGluZGV4LCBzYW1lIGRpc2tzLCBzYW1lIGNvbmZpZ3VyYXRpb24s
+<br>
+IHNhbWUgbmV0d29yay4NCg0KTWF0dGhldw0KDQo+IE9uIDggTWFyIDIwMTcsIGF0IDU6MjUgcG0s
+<br>
+IFNoYXduIEhlaXNleSA8YXBhY2hlQGVseW9ncmFnLm9yZz4gd3JvdGU6DQo+IA0KPj4gT24gMy84
+<br>
+LzIwMTcgNTozMCBBTSwgQ2FydWFuYSwgTWF0dGhldyB3cm90ZToNCj4+IEFmdGVyIHVwZ3JhZGlu
+<br>
+ZyB0byA2LjQuMiBmcm9tIDYuNC4xLCB3ZeKAmXZlIHNlZW4gcmVwbGljYXRpb24gdGltZSBmb3Ig
+<br>
+YQ0KPj4gMjAwZ2IgaW5kZXggZGVjcmVhc2UgZnJvbSA0NSBob3VycyB0byAxLjUgaG91cnMuIA0K
+<br>
+PiANCj4gSnVzdCB0byBjaGVjayBob3cgbG9uZyBpdCB0YWtlcyB0byBtb3ZlIGEgbGFyZ2UgYW1v
+<br>
+dW50IG9mIGRhdGEgb3ZlciBhDQo+IG5ldHdvcmssIEkgc3RhcnRlZCBhIGNvcHkgb2YgYSAzMkdC
+<br>
+IGRpcmVjdG9yeSBvdmVyIGEgMTAwTWIvcyBuZXR3b3JrDQo+IHVzaW5nIGEgV2luZG93cyBjbGll
+<br>
+bnQgYW5kIGEgU2FtYmEgc2VydmVyLiAgSXQgc2FpZCBpdCB3b3VsZCB0YWtlIDUwDQo+IG1pbnV0
+<br>
+ZXMuICBBdCB0aGlzIHJhdGUsIGNvcHlpbmcgMjAwR0Igd291bGQgdGFrZSBvdmVyIGZpdmUgaG91
+<br>
+cnMuICBUaGlzDQo+IGlzIHF1aXRlIGEgYml0IGxvbmdlciB0aGFuIEkgZXhwZWN0ZWQsIGJ1dCBJ
+<br>
+IGhhZG4ndCBkb25lIHRoZSBtYXRoIHRvDQo+IGNoZWNrIHRyYW5zZmVyIHJhdGUgYWdhaW5zdCBz
+<br>
+aXplLg0KPiANCj4gQXNzdW1pbmcgdGhhdCB5b3UgYWN0dWFsbHkgaW50ZW5kZWQgdG8gdXNlIHRo
+<br>
+ZSB3b3JkICJyZXBsaWNhdGlvbiIgdGhlcmUNCj4gKGFuZCBub3Qgc29tZXRoaW5nIGxpa2UgInJl
+<br>
+YnVpbGQiKSwgdGhpcyB0ZWxscyBtZSB0aGF0IHlvdXIgbmV0d29yayBpcw0KPiBjb25zaWRlcmFi
+<br>
+bHkgZmFzdGVyIHRoYW4gMTAwIG1lZ2FiaXRzIHBlciBzZWNvbmQsIHByb2JhYmx5IGdpZ2FiaXQs
+<br>
+IGFuZA0KPiB0aGF0IHRoZSBib3R0bGVuZWNrIGlzIHRoZSBzcGVlZCBvZiB0aGUgZGlza3MuDQo+
+<br>
+IA0KPiBJIHNlZSBhIHByZXZpb3VzIHRocmVhZCB3aGVyZSB5b3UgYXNrZWQgYWJvdXQgb3B0aW1p
+<br>
+emF0aW9uIHBlcmZvcm1hbmNlLA0KPiBzbyBpdCBzb3VuZHMgbGlrZSB5b3UgYXJlIG9wdGltaXpp
+<br>
+bmcgdGhlIG1hc3RlciBpbmRleCB3aGljaCBjYXVzZXMgYQ0KPiBmdWxsIHJlcGxpY2F0aW9uIHRv
+<br>
+IHNsYXZlcy4gIFRoaXMgaXMgb25lIG9mIHRoZSByZWFzb25zIHRoYXQNCj4gb3B0aW1pemF0aW9u
+<br>
+IGlzIGdlbmVyYWxseSBub3QgcmVjb21tZW5kZWQgZXhjZXB0IG9uIHZlcnkgc21hbGwgaW5kZXhl
+<br>
+cw0KPiBvciBpbmRleGVzIHRoYXQgZG8gbm90IGNoYW5nZSB2ZXJ5IG9mdGVuLg0KPiANCj4gVGhh
+<br>
+bmtzLA0KPiBTaGF3bg0KPiANCg==
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">On 3/8/2017 2:36 AM, Bernd Fehling wrote:
+<br>
+> Shouldn't in server/solr/configsets/.../solrconfig.xml
+<br>
+> <luceneMatchVersion>6.4.1</luceneMatchVersion>
+<br>
+> really read
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+>
+<br>
+> May be something for package builder for future releases?
+<br>
+
+<br>
+That does look like it got overlooked, and is generally something that
+<br>
+SHOULD be changed with each new version, but in this case, changing
+<br>
+between those two version numbers will have zero effect.  It is against
+<br>
+project policy to make significant changes in a bugfix release (where
+<br>
+third version number changes).
+<br>
+
+<br>
+Any change that's significant enough to be controlled by a
+<br>
+luceneMatchVersion check would only be allowed a minor or major release.
+<br>
+
+<br>
+Thanks,
+<br>
+Shawn
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">Hi,
+<br>
+
+<br>
+Just to check, are the index that was indexed in Solr 6.4.1 affected by the
+<br>
+bug? Do we have to re-index those records when we move to Solr 6.4.2?
+<br>
+
+<br>
+Regards,
+<br>
+Edwin
+<br>
+
+<br>
+
+<br>
+On 9 March 2017 at 12:49, Shawn Heisey <apache@elyograg.org> wrote:
+<br>
+
+<br>
+> On 3/8/2017 2:36 AM, Bernd Fehling wrote:
+<br>
+> > Shouldn't in server/solr/configsets/.../solrconfig.xml
+<br>
+> > <luceneMatchVersion>6.4.1</luceneMatchVersion>
+<br>
+> > really read
+<br>
+> > <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> >
+<br>
+> > May be something for package builder for future releases?
+<br>
+>
+<br>
+> That does look like it got overlooked, and is generally something that
+<br>
+> SHOULD be changed with each new version, but in this case, changing
+<br>
+> between those two version numbers will have zero effect.  It is against
+<br>
+> project policy to make significant changes in a bugfix release (where
+<br>
+> third version number changes).
+<br>
+>
+<br>
+> Any change that's significant enough to be controlled by a
+<br>
+> luceneMatchVersion check would only be allowed a minor or major release.
+<br>
+>
+<br>
+> Thanks,
+<br>
+> Shawn
+<br>
+>
+<br>
+>
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">Hi Bernd,
+<br>
+Can you please double check?
+<br>
+
+<br>
+I downloaded the 6.4.2 tarball and see that they have 6.4.2:
+<br>
+
+<br>
+[ishan@ishanvps solr-6.4.2]$ grep -rn "luceneMatchVersion" *|grep
+<br>
+solrconfig.xml
+<br>
+CHANGES.txt:1474:  <schemaFactory class="ClassicIndexSchemaFactory"/> or
+<br>
+your luceneMatchVersion in the solrconfig.xml is less than 6.0
+<br>
+docs/changes/Changes.html:1694:&lt;schemaFactory
+<br>
+class="ClassicIndexSchemaFactory"/&gt; or your luceneMatchVersion in the
+<br>
+solrconfig.xml is less than 6.0
+<br>
+example/files/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+example/example-DIH/solr/tika/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+example/example-DIH/solr/rss/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+example/example-DIH/solr/mail/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+example/example-DIH/solr/db/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+example/example-DIH/solr/solr/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+server/solr/configsets/basic_configs/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+server/solr/configsets/sample_techproducts_configs/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+server/solr/configsets/data_driven_schema_configs/conf/solrconfig.xml:38:
+<br>
+<luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+
+<br>
+
+<br>
+Maybe you downloaded the 6.4.1 version by mistake?
+<br>
+Thanks,
+<br>
+Ishan
+<br>
+
+<br>
+
+<br>
+On Thu, Mar 9, 2017 at 10:19 AM, Shawn Heisey <apache@elyograg.org> wrote:
+<br>
+
+<br>
+> On 3/8/2017 2:36 AM, Bernd Fehling wrote:
+<br>
+> > Shouldn't in server/solr/configsets/.../solrconfig.xml
+<br>
+> > <luceneMatchVersion>6.4.1</luceneMatchVersion>
+<br>
+> > really read
+<br>
+> > <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> >
+<br>
+> > May be something for package builder for future releases?
+<br>
+>
+<br>
+> That does look like it got overlooked, and is generally something that
+<br>
+> SHOULD be changed with each new version, but in this case, changing
+<br>
+> between those two version numbers will have zero effect.  It is against
+<br>
+> project policy to make significant changes in a bugfix release (where
+<br>
+> third version number changes).
+<br>
+>
+<br>
+> Any change that's significant enough to be controlled by a
+<br>
+> luceneMatchVersion check would only be allowed a minor or major release.
+<br>
+>
+<br>
+> Thanks,
+<br>
+> Shawn
+<br>
+>
+<br>
+>
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">Hi Ishan,
+<br>
+
+<br>
+yes you are right!
+<br>
+
+<br>
+Left over from previous version during replace :-(
+<br>
+
+<br>
+Thanks for your help,
+<br>
+Bernd
+<br>
+
+<br>
+
+<br>
+Am 09.03.2017 um 06:49 schrieb Ishan Chattopadhyaya:
+<br>
+> Hi Bernd,
+<br>
+> Can you please double check?
+<br>
+> 
+<br>
+> I downloaded the 6.4.2 tarball and see that they have 6.4.2:
+<br>
+> 
+<br>
+> [ishan@ishanvps solr-6.4.2]$ grep -rn "luceneMatchVersion" *|grep
+<br>
+> solrconfig.xml
+<br>
+> CHANGES.txt:1474:  <schemaFactory class="ClassicIndexSchemaFactory"/> or
+<br>
+> your luceneMatchVersion in the solrconfig.xml is less than 6.0
+<br>
+> docs/changes/Changes.html:1694:&lt;schemaFactory
+<br>
+> class="ClassicIndexSchemaFactory"/&gt; or your luceneMatchVersion in the
+<br>
+> solrconfig.xml is less than 6.0
+<br>
+> example/files/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> example/example-DIH/solr/tika/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> example/example-DIH/solr/rss/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> example/example-DIH/solr/mail/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> example/example-DIH/solr/db/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> example/example-DIH/solr/solr/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> server/solr/configsets/basic_configs/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> server/solr/configsets/sample_techproducts_configs/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> server/solr/configsets/data_driven_schema_configs/conf/solrconfig.xml:38:
+<br>
+> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+> 
+<br>
+> 
+<br>
+> Maybe you downloaded the 6.4.1 version by mistake?
+<br>
+> Thanks,
+<br>
+> Ishan
+<br>
+> 
+<br>
+> 
+<br>
+> On Thu, Mar 9, 2017 at 10:19 AM, Shawn Heisey <apache@elyograg.org> wrote:
+<br>
+> 
+<br>
+>> On 3/8/2017 2:36 AM, Bernd Fehling wrote:
+<br>
+>>> Shouldn't in server/solr/configsets/.../solrconfig.xml
+<br>
+>>> <luceneMatchVersion>6.4.1</luceneMatchVersion>
+<br>
+>>> really read
+<br>
+>>> <luceneMatchVersion>6.4.2</luceneMatchVersion>
+<br>
+>>>
+<br>
+>>> May be something for package builder for future releases?
+<br>
+>>
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">On 3/8/2017 10:46 PM, Zheng Lin Edwin Yeo wrote:
+<br>
+> Just to check, are the index that was indexed in Solr 6.4.1 affected
+<br>
+> by the bug? Do we have to re-index those records when we move to Solr
+<br>
+> 6.4.2? 
+<br>
+
+<br>
+None of the bugs fixed between 6.4.1 and 6.4.2 should affect your index
+<br>
+contents at all.  That's really the point of a bugfix release -- to fix
+<br>
+problems that have been found without causing new ones.
+<br>
+
+<br>
+Thanks,
+<br>
+Shawn
+<br>
+
+<br>
+</p>
+<br><br><br><br>
+<h4>[ANNOUNCE] Apache Solr 6.4.2 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Ishan Chattopadhyaya <ishan@apache.org></p>
+<p class="message">Hi Shawn,
+<br>
+
+<br>
+Thanks for the info.
+<br>
+
+<br>
+Regards,
+<br>
+Edwin
+<br>
+
+<br>
+
+<br>
+On 9 March 2017 at 23:09, Shawn Heisey <apache@elyograg.org> wrote:
+<br>
+
+<br>
+> On 3/8/2017 10:46 PM, Zheng Lin Edwin Yeo wrote:
+<br>
+> > Just to check, are the index that was indexed in Solr 6.4.1 affected
+<br>
+> > by the bug? Do we have to re-index those records when we move to Solr
+<br>
+> > 6.4.2?
+<br>
+>
+<br>
+> None of the bugs fixed between 6.4.1 and 6.4.2 should affect your index
+<br>
+> contents at all.  That's really the point of a bugfix release -- to fix
+<br>
+> problems that have been found without causing new ones.
+<br>
+>
+<br>
+> Thanks,
+<br>
+> Shawn
+<br>
+>
+<br>
+>
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a8ac1868cfdcea">Tread: 15a8ac1868cfdcea</h3></a>
+<em>Wed, 1 Mar 2017 15:52:58 +0000</em>
+<h4>[ANNOUNCE] Psycopg 2.7 released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Daniele Varrazzo <daniele.varrazzo@gmail.com></p>
+<p class="message">It's finally here! Thank you very much for waiting so long: we have
+<br>
+finally released Psycopg 2.7!
+<br>
+
+<br>
+Buzzwords:
+<br>
+
+<br>
+- Faster! Helps generating SQL for repeatedly executed statements and
+<br>
+  faster Unicode decoding.
+<br>
+- Safer! Helps generating dynamic SQL statements with variable table and
+<br>
+  field names.
+<br>
+- Easier! Use the binary package to avoid the need of C compiler, pg_config,
+<br>
+  libpq required on the clients.
+<br>
+- Replication! Support for PostgreSQL physical and logical replication.
+<br>
+- Plays-better-with-pgbouncer-at-transaction-pooling-level! This.
+<br>
+
+<br>
+You can download the source packages as usual from the canonical urls:
+<br>
+
+<br>
+- http://initd.org/psycopg/tarballs/PSYCOPG-2-7/psycopg2-2.7.tar.gz
+<br>
+- http://initd.org/psycopg/tarballs/PSYCOPG-2-7/psycopg2-2.7.tar.gz.asc
+<br>
+
+<br>
+Or just use pip:
+<br>
+
+<br>
+    pip install psycopg2
+<br>
+
+<br>
+Before dumping the full set of changes I wish to thank again all the
+<br>
+people who have contributed to this psycopg version, especially
+<br>
+Oleksandr Shulgin and Craig Ringer for the replication protocol
+<br>
+support and Jason Erickson for the windows packaging.
+<br>
+
+<br>
+New features:
+<br>
+
+<br>
+- Added psycopg2.sql module to generate SQL dynamically (ticket #308).
+<br>
+- Added replication protocol support (ticket #322).
+<br>
+- Added parse_dsn() and make_dsn() functions (ticket #321, ticket #363).
+<br>
+  connect() now can take both dsn and keyword arguments, merging them
+<br>
+  together.
+<br>
+- Added __libpq_version__ and libpq_version() to inspect the version of
+<br>
+  the libpq library the module was compiled/loaded with (ticket #35,
+<br>
+  ticket #323).
+<br>
+- The attributes notices and notifies can be customized replacing them
+<br>
+  with any object exposing an append() method (ticket #326).
+<br>
+- Adapt network types to ipaddress objects when available. When not
+<br>
+  enabled, convert arrays of network types to lists by default. The old
+<br>
+  Inet adapter is deprecated (ticket #317, ticket #343, ticket #387).
+<br>
+- Added quote_ident() function (ticket #359).
+<br>
+- Added get_dsn_parameters() connection method (ticket #364).
+<br>
+- callproc() now accepts a dictionary of parameters (ticket #381).
+<br>
+- Give precedence to __conform__() over superclasses to choose an object
+<br>
+  adapter (ticket #456).
+<br>
+- Using Python C API decoding functions and codecs caching for faster
+<br>
+  Unicode encoding/decoding (ticket #473).
+<br>
+- executemany() slowness addressed by execute_batch() and execute_values()
+<br>
+  (ticket #491).
+<br>
+- Added async_ as an alias for async to support Python 3.7 where async
+<br>
+  will become a keyword (ticket #495).
+<br>
+- Unless in autocommit, do not use default_transaction_* settings to
+<br>
+  control the session characteristics as it may create problems with
+<br>
+  external connection pools such as pgbouncer; use BEGIN options instead
+<br>
+  (ticket #503).
+<br>
+- isolation_level is now writable and entirely separated from autocommit;
+<br>
+  added readonly, deferrable writable attributes.
+<br>
+
+<br>
+Bug fixes:
+<br>
+
+<br>
+- Fixed error caused by missing decoding LoggingConnection (ticket #483).
+<br>
+- Fixed integer overflow in interval seconds (ticket #512).
+<br>
+
+<br>
+Other changes:
+<br>
+
+<br>
+- Dropped support for Python 2.5 and 3.1.
+<br>
+- Dropped support for client library older than PostgreSQL 9.1 (but older
+<br>
+  server versions are still supported).
+<br>
+- isolation_level doesn't read from the database but will return
+<br>
+  ISOLATION_LEVEL_DEFAULT if no value was set on the connection.
+<br>
+- Empty arrays no more converted into lists if they don't have a type
+<br>
+  attached (ticket #506).
+<br>
+
+<br>
+
+<br>
+----
+<br>
+
+<br>
+Psycopg is the most popular PostgreSQL adapter for the Python
+<br>
+programming language. At its core it fully implements the Python DB
+<br>
+API 2.0 specifications. Several extensions allow access to many of the
+<br>
+features offered by PostgreSQL.
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a82f3990598ed9">Tread: 15a82f3990598ed9</h3></a>
+<em>Tue, 28 Feb 2017 12:12:45 +0900</em>
+<h4>[ANNOUNCE] pgpoolAdmin 3.6.0 released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Bo Peng <pengbo@sraoss.co.jp></p>
+<p class="message">Pgpool-II is a tool to add usefull features to PostgreSQL, including
+<br>
+connection pooling, load balancing, automatic fail over and more.
+<br>
+
+<br>
+Pgpool Global Development Group is pleased to announce the availability
+<br>
+of pgpoolAdmin 3.6.0. 
+<br>
+
+<br>
+You can download the source code, installer, RPMs from:
+<br>
+http://pgpool.net/mediawiki/index.php/Downloads
+<br>
+
+<br>
+Release notes is included in the source code.
+<br>
+
+<br>
+===========================================================================
+<br>
+* Version 3.6.0 2017/02/28
+<br>
+
+<br>
+   - Fix incorrect display of watchdog status when using Pgpool-II 3.6.x. (Bo Peng)
+<br>
+
+<br>
+   - Redirect stdout, stderr to log file while starting Pgpool-II without
+<br>
+     running in daemon mode. (Bo Peng)
+<br>
+
+<br>
+   - Fix superuser: unknown (Connection error) in pgpoolAdmin. (Bo Peng)
+<br>
+
+<br>
+     per bug276.
+<br>
+-- 
+<br>
+Bo Peng <pengbo@sraoss.co.jp>
+<br>
+SRA OSS, Inc. Japan
+<br>
+
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a7c0c5705710d9">Tread: 15a7c0c5705710d9</h3></a>
+<em></em>
+<h4>[ANN] Apache Tomcat Native 1.2.12 released</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Mark Thomas <markt@apache.org></p>
+<p class="message">The Apache Tomcat team announces the immediate availability of Apache
+<br>
+Tomcat Native 1.2.12 stable.
+<br>
+
+<br>
+The key features of this release are:
+<br>
+- Windows binaries built with APR 1.5.2 and OpenSSL 1.0.2k.
+<br>
+- Better documentation for building on Windows including with
+<br>
+  FIPS enabled OpenSSL.
+<br>
+
+<br>
+Note that users should now be using 1.2.x in preference to 1.1.x.
+<br>
+
+<br>
+Please refer to the change log for the complete list of changes:
+<br>
+http://tomcat.apache.org/native-doc/miscellaneous/changelog.html
+<br>
+
+<br>
+Downloads:
+<br>
+http://tomcat.apache.org/download-native.cgi
+<br>
+
+<br>
+The Apache Tomcat Native Library provides portable API for features
+<br>
+not found in contemporary JDK's. It uses Apache Portable Runtime as
+<br>
+operating system abstraction layer and OpenSSL for SSL networking and
+<br>
+allows optimal performance in production environments.
+<br>
+
+<br>
+
+<br>
+Thank you,
+<br>
+-- 
+<br>
+The Apache Tomcat Team
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a4db436018a8a3">Tread: 15a4db436018a8a3</h3></a>
+<em>Fri, 17 Feb 2017 15:30:49 +0100</em>
+<h4>[ANNOUNCE] Ora2Pg v18.1 has been released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Gilles Darold <gilles.darold@dalibo.com></p>
+<p class="message">Paris, France - Febuary 17th, 2017
+<br>
+
+<br>
+**Ora2Pg 18.1 released**
+<br>
+
+<br>
+Version 18.1 of Ora2Pg, a free and reliable tool used to migrate an
+<br>
+Oracle database to PostgreSQL, has been officially released and is
+<br>
+publicly available for download.
+<br>
+
+<br>
+This release fix several issues reported on outer join translation
+<br>
+thanks to the help of Pavel Stehule and reapply the commit on virtual
+<br>
+column export that was accidentally removed from v18.0. It also adds
+<br>
+several new features:
+<br>
+
+<br>
+  * Remove CHECK constraints for columns converted into boolean using
+<br>
+    REPLACE_AS_BOOLEAN column.
+<br>
+  * Oracle function are now marked as stable by default as they can
+<br>
+    not modify data.
+<br>
+
+<br>
+Two new configuration directives have been added:
+<br>
+
+<br>
+  * DATE_FUNCTION_REWRITE: by default Ora2pg rewrite add_month(),
+<br>
+    add_year() and date_trunc() functions set it to 0 to force Ora2Pg
+<br>
+    to not translate those functions if translated code is broken.
+<br>
+  * GRANT_OBJECT: when exporting GRANT you can now specify a comma
+<br>
+    separated list of objects which privileges must be exported.
+<br>
+    Default is to export privileges for all objects. For example
+<br>
+    set it to TABLE if you just want to export privilege on tables.
+<br>
+
+<br>
+and a new command line option:
+<br>
+
+<br>
+  * Add -g | --grant_object command line option to ora2pg to be able
+<br>
+    to extract privilege from the given object type. See possible values
+<br>
+    with GRANT_OBJECT configuration directive.
+<br>
+
+<br>
+For a complete list of change see
+<br>
+https://github.com/darold/ora2pg/blob/master/changelog
+<br>
+
+<br>
+Thanks to all contributors, they are all cited in the changelog file.
+<br>
+
+<br>
+Useful Links:
+<br>
+
+<br>
+    - Website: http://ora2pg.darold.net/
+<br>
+    - Download: http://sourceforge.net/projects/ora2pg/
+<br>
+    - Development: https://github.com/darold/ora2pg
+<br>
+    - Changelog: https://github.com/darold/ora2pg/blob/master/changelog
+<br>
+    - Documentation: https://github.com/darold/ora2pg/blob/master/README
+<br>
+
+<br>
+About Ora2Pg :
+<br>
+
+<br>
+Ora2Pg is an easy and reliable tool to migrate from Oracle to PostgreSQL.
+<br>
+It is developed since 2001 and can export most of the Oracle objects
+<br>
+(table, view, materialized view, tablespace, sequence, indexes, trigger,
+<br>
+grant, function, procedure, package, partition, data, blob and external
+<br>
+table).
+<br>
+
+<br>
+Ora2Pg works on any platform and is available under the GPL v3 licence.
+<br>
+
+<br>
+Docs, Download & Support at http://ora2pg.darold.net/
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Gilles Darold
+<br>
+Consultant PostgreSQL
+<br>
+http://dalibo.com - http://dalibo.org
+<br>
+
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a4d4d298b74222">Tread: 15a4d4d298b74222</h3></a>
+<em>Fri, 17 Feb 2017 12:19:42 -0600</em>
+<h4>Apache Solr Reference Guide for Solr 6.4 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Cassandra Targett <ctargett@apache.org></p>
+<p class="message">The Lucene PMC is pleased to announce that the Solr Reference Guide
+<br>
+for Solr 6.4 has been released.
+<br>
+
+<br>
+This 763-page PDF is the definitive guide to using Apache Solr, the
+<br>
+search server built on Apache Lucene. The Guide can be downloaded
+<br>
+from:
+<br>
+
+<br>
+https://dist.apache.org/repos/dist/release/lucene/solr/ref-guide/apache-solr-ref-guide-6.4.pdf
+<br>
+
+<br>
+Cassandra
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a4ca08ca3c6552">Tread: 15a4ca08ca3c6552</h3></a>
+<em>Fri, 17 Feb 2017 00:47:53 +0000</em>
+<h4>[ANNOUNCE] Psycopg 2.7 beta 2 released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Daniele Varrazzo <daniele.varrazzo@gmail.com></p>
+<p class="message">Hello,
+<br>
+
+<br>
+we have released psycopg2 version 2.7 beta 2. This version comes two
+<br>
+years after the previous major release so it is packed with new
+<br>
+features and improvements; among the main points:
+<br>
+
+<br>
+- support for replication protocol
+<br>
+- helpers to build dynamically SQL statements and manipulate connection strings
+<br>
+- speedups in multiple execution and Unicode decoding
+<br>
+- better transactions characteristics support
+<br>
+
+<br>
+A more complete list of changes is available at
+<br>
+http://initd.org/psycopg/docs/news.html#what-s-new-in-psycopg-2-7
+<br>
+
+<br>
+On top of the changes in the code we have addressed the deployment
+<br>
+problems found my many inexperienced users, especially on Windows and
+<br>
+OSX: psycopg is now distributed as a self-contained wheel package on
+<br>
+PyPI, so that:
+<br>
+
+<br>
+    pip install psycopg2
+<br>
+
+<br>
+will not require the presence of C compiler, headers, pg_config, libpq.
+<br>
+
+<br>
+Because of all these changes, we ask you kindly to test this psycopg
+<br>
+beta release, both its installation and its usage, before we release
+<br>
+the stable version, which should happen next week if we don't find any
+<br>
+problem. The binary packages of the beta release are on the PyPI
+<br>
+testing site: you can install it using:
+<br>
+
+<br>
+    pip install -U pip # make sure to have an up-to-date pip
+<br>
+    pip install -i https://testpypi.python.org/pypi psycopg2==2.7b2
+<br>
+
+<br>
+Thank you very much everyone, and I wish to thank especially Oleksandr
+<br>
+Shulgin and Craig Ringer for the development of the replication
+<br>
+protocol support (the development of which brought along several other
+<br>
+features and improvement) and Jason Erickson for the invaluable help
+<br>
+with the Windows packages.
+<br>
+
+<br>
+Happy testing!
+<br>
+
+<br>
+-- Daniele
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a43ff2dc8d5d49">Tread: 15a43ff2dc8d5d49</h3></a>
+<em></em>
+<h4>[SECURITY] CVE-2017-3163 Apache Solr ReplicationHandler path traversal attack</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		"Jan Hydahl" <janhoy@apache.org></p>
+<p class="message">-----BEGIN PGP SIGNATURE-----
+<br>
+Comment: GPGTools - http://gpgtools.org
+<br>
+
+<br>
+iQIcBAEBCgAGBQJYpNzwAAoJEPqBrIpJD1OOXlMQAJEveURR9eOK+Z8vSFFd8d9q
+<br>
+9ZxfjLZxWvllEgi3iATZy5HWuP92c0qcAX1nxUVhh9QzFoRqykAFZHEwlcL4+x3G
+<br>
+Mq587/YC7JxePSWpY8Sx5Np4dIOq+yoww7JZk56kJ2jHpeHCYgeh4KEyGHyqjTIJ
+<br>
+HaonghVhJ8xxPO8E0QVFUU3KCAGtXCa9InCK/oo0FCjBQ7uv7w2jwL53DFsXCsbQ
+<br>
+oJykJXyy6OD9wO9Z2tMmRjndEEZ0NrumUxUk+3IETX7LxQ4tWQre/yX26JYYIPgL
+<br>
+THHpsdYwLs2zWVaHqofYDgEXmM/JW5p6rqwlHuE/kNjE1fm+zGBUTV9Upn/9ATgI
+<br>
+a55Z53atD9LWfrwkUTiDSwDZxXZrynBH4p5KJxBq9X3QjSUPNcdA6xxxATdxl/ck
+<br>
+Nu3gFNCZ8ZCDG5nWXhQVuPWiQXzgoBH6uNIQ/CNku5Wv7ThcnpfgztWtw2SK1utH
+<br>
+zkmLvBq0u7vKBJbHvbuuv5FU4hrrwoDZIqWHKZ0Vh2WCVPLsIPDdqXby+8b2P6P3
+<br>
+L4QvhnEvk71SHp61bcVRnSk2UAgYXXbW1YrJTez6jbh3qaq3MzN0/m8j7HsFFhDg
+<br>
+CcKqkcqBbiiA2nJ9zrqSzjFCoOuuu16D2FDm9o/j3Pd32GQmBQQFvhuK2L5Z/dGv
+<br>
+AEBK6aS9VZmebs4kdh37
+<br>
+=iczQ
+<br>
+-----END PGP SIGNATURE-----
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a42a5d55c86233">Tread: 15a42a5d55c86233</h3></a>
+<em>Wed, 15 Feb 2017 16:31:17 +0000</em>
+<h4>[ANNOUNCE] Apache Solr 5.5.4 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Adrien Grand <jpountz@apache.org></p>
+<p class="message">15 February 2017, Apache Solr=E2=84=A2 5.5.4 available
+<br>
+
+<br>
+The Lucene PMC is pleased to announce the release of Apache Solr 5.5.4
+<br>
+
+<br>
+Solr is the popular, blazing fast, open source NoSQL search platform
+<br>
+from the Apache Lucene project. Its major features include powerful
+<br>
+full-text search, hit highlighting, faceted search, dynamic
+<br>
+clustering, database integration, rich document (e.g., Word, PDF)
+<br>
+handling, and geospatial search. Solr is highly scalable, providing
+<br>
+fault tolerant distributed search and indexing, and powers the search
+<br>
+and navigation features of many of the world's largest internet sites.
+<br>
+
+<br>
+The release is available for immediate download at:
+<br>
+
+<br>
+  http://www.apache.org/dyn/closer.lua/lucene/solr/5.5.4
+<br>
+
+<br>
+This release includes 2 bug fixes since the 5.5.3 release:
+<br>
+ * Better validation of filename params in ReplicationHandler
+<br>
+ * Upgraded commons-fileupload to 1.3.2, fixing a potential vulnerability
+<br>
+CVE-2016-3092
+<br>
+
+<br>
+Please read CHANGES.txt for a detailed list of changes:
+<br>
+
+<br>
+  https://lucene.apache.org/solr/5_5_4/changes/Changes.html
+<br>
+
+<br>
+Please report any feedback to the mailing lists
+<br>
+(http://lucene.apache.org/solr/discussion.html)
+<br>
+
+<br>
+Note: The Apache Software Foundation uses an extensive mirroring
+<br>
+network for distributing releases. It is possible that the mirror you
+<br>
+are using may not have replicated the release yet. If that is the
+<br>
+case, please try another mirror. This also goes for Maven access.
+<br>
+
+<br>
+--=20
+<br>
+Adrien Grand
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a315823e0b0417">Tread: 15a315823e0b0417</h3></a>
+<em>Sun, 12 Feb 2017 10:02:13 +0200</em>
+<h4>[ANNOUNCEMENT] Luke 6.4.1 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Dmitry Kan <solrexpert@gmail.com></p>
+<p class="message">Download the release zip here:
+<br>
+
+<br>
+https://github.com/DmitryKey/luke/releases/tag/luke-6.4.1
+<br>
+
+<br>
+Upgrade to Lucene 6.4.1.
+<br>
+
+<br>
+Supports:
+<br>
+
+<br>
+Apache Solr 6.4.1
+<br>
+Elasticsearch 5.2.0
+<br>
+
+<br>
+Pull-requests: #79 <https://github.com/DmitryKey/luke/pull/79> and #80
+<br>
+<https://github.com/DmitryKey/luke/pull/80>.
+<br>
+
+<br>
+-- 
+<br>
+Dmitry Kan
+<br>
+Luke Toolbox: http://github.com/DmitryKey/luke
+<br>
+Blog: http://dmitrykan.blogspot.com
+<br>
+Twitter: http://twitter.com/dmitrykan
+<br>
+SemanticAnalyzer: www.semanticanalyzer.info
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a281a3b514ec82">Tread: 15a281a3b514ec82</h3></a>
+<em>Fri, 10 Feb 2017 13:57:16 +0100</em>
+<h4>[GeoNetwork-users] GeoNetwork 3.2.1 released</h4><p>List:		geonetwork-users@lists.sourceforge.net</p>
+<p>From:		Francois Prunayre <fx.prunayre@gmail.com></p>
+<p class="message">Dear all,
+<br>
+
+<br>
+We're proud to announce the release of GeoNetwork opensource v3.2.1(
+<br>
+http://geonetwork-opensource.org/). This is a maintenance release for the
+<br>
+project.
+<br>
+
+<br>
+You can find the software at
+<br>
+https://sourceforge.net/projects/geonetwork/files/GeoNetwork
+<br>
+_opensource/v3.2.1/
+<br>
+
+<br>
+You can find a list of new functionalities and fixes in v3.2.1 at
+<br>
+http://geonetwork-opensource.org/manuals/trunk/
+<br>
+eng/users/overview/change-log/version-3.2.1.html
+<br>
+
+<br>
+If you have any improvements you want to contribute back, the best is to
+<br>
+use git to get a local copy of the source code, apply the fix and put out a
+<br>
+Pull request so your improvements can be integrated quickly. Otherwise you
+<br>
+can also create new Tickets in the issue tracker:
+<br>
+https://github.com/geonetwork/core-geonetwork/issues
+<br>
+
+<br>
+Thanks and congratulations to the all community members and developers that
+<br>
+have been putting efforts and energy in this release!
+<br>
+
+<br>
+Francois Prunayre
+<br>
+
+<br>
+PSC member
+<br>
+------------------------------------------------------------------------------
+<br>
+Check out the vibrant tech community on one of the world's most
+<br>
+engaging tech sites, SlashDot.org! http://sdm.link/slashdot
+<br>
+_______________________________________________
+<br>
+GeoNetwork-users mailing list
+<br>
+GeoNetwork-users@lists.sourceforge.net
+<br>
+https://lists.sourceforge.net/lists/listinfo/geonetwork-users
+<br>
+GeoNetwork OpenSource is maintained at http://sourceforge.net/projects/geonetwork
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a236f6f0f0343d">Tread: 15a236f6f0f0343d</h3></a>
+<em>Thu, 9 Feb 2017 14:18:49 +0000</em>
+<h4>[ANNOUNCE] PostgreSQL 9.6.2, 9.5.6, 9.4.11, 9.3.16 and 9.2.20 released!</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Dave Page <dpage@postgresql.org></p>
+<p class="message">The PostgreSQL Global Development Group has released an update to all
+<br>
+supported versions of our database system, including 9.6.2, 9.5.6,
+<br>
+9.4.11, 9.3.16, and 9.2.20. This release includes fixes that prevent
+<br>
+data corruption issues in index builds and in certain write-ahead-log
+<br>
+replay situations, which are detailed below.  It also patches over 75
+<br>
+other bugs reported over the last three months.
+<br>
+
+<br>
+Users should plan to apply this update at the next scheduled downtime.
+<br>
+
+<br>
+Build corruption with CREATE INDEX CONCURRENTLY
+<br>
+----------------------------------
+<br>
+
+<br>
+There existed a race condition if CREATE INDEX CONCURRENTLY was called
+<br>
+on a column that had not been indexed before, then rows that were
+<br>
+updated by transactions running at the same time as the CREATE INDEX
+<br>
+CONCURRENTLY command could have been indexed incorrectly.
+<br>
+
+<br>
+If you suspect this may have happened, the most reliable solution is
+<br>
+to rebuild affected indexes after installing this update.
+<br>
+
+<br>
+This issue is present in the 9.2, 9.3, 9.4, 9.5, and 9.6 series of PostgreSQL.
+<br>
+
+<br>
+Fixes for visibility and write-ahead-log stability
+<br>
+----------------------------------
+<br>
+
+<br>
+These release contains several fixes to improve the stability of
+<br>
+visible data and WAL logging that we wish to highlight here.
+<br>
+
+<br>
+Prior to this release, data could be prematurely pruned by a vacuum
+<br>
+operation when a special snapshot used for catalog scans was presently
+<br>
+available.  Specifically, the vacuum operation would not be aware of
+<br>
+the oldest xmin for this special snapshot. The error would surface
+<br>
+with a message such as:
+<br>
+
+<br>
+    "cache lookup failed for relation 1255"
+<br>
+
+<br>
+This release ensures that vacuum operations will account for the
+<br>
+catalog scan snapshots.
+<br>
+
+<br>
+Additionally, there are several fixes to improved the stability of
+<br>
+write-ahead-logging, including:
+<br>
+
+<br>
+    * A fix for BRIN index WAL logging where a replay could make a
+<br>
+portion of the BRIN index useless and require recomputing
+<br>
+    * A fix for an unlogged table where a WAL-log would be created
+<br>
+under the "wal_level = minimal" setting, and upon replay after crash,
+<br>
+the table would not appear to be properly reset
+<br>
+    * A fix in the WAL page header validation when re-reading segments
+<br>
+that fixes the error of "out-of-sequence TLI"  that could be reported
+<br>
+during recovery
+<br>
+
+<br>
+Theses issues are present in the 9.6 series of PostgreSQL releases and
+<br>
+may also be present in the 9.2, 9.3, 9.4, and 9.5 series.
+<br>
+
+<br>
+Bug Fixes and Improvements
+<br>
+--------------------------
+<br>
+
+<br>
+This update also fixes a number of bugs reported in the last few
+<br>
+months. Some of these issues affect only the 9.6 series, but many
+<br>
+affect all supported versions.  There are more than 75 fixes provided
+<br>
+in this release, including:
+<br>
+
+<br>
+* Several fixes for operating in hot standby mode
+<br>
+* Disallow setting the num_sync field to zero in synchronous_standby_names
+<br>
+* Don't count background worker processes against a user's connection limit
+<br>
+* Fix check for when an extension member object can be dropped
+<br>
+* Fix tracking of initial privileges for extension member objects so
+<br>
+that it works correctly with ALTER EXTENSION ... ADD/DROP
+<br>
+* Several vacuum and autovacuum fixes
+<br>
+* Fix CREATE OR REPLACE VIEW to update the view query before
+<br>
+attempting to apply the new view options
+<br>
+* Make sure ALTER TABLE preserves index tablespace assignments when
+<br>
+rebuilding indexes
+<br>
+* Several fixes to the query planner, including fixes for foreign
+<br>
+tables and CTEs
+<br>
+* Several fixes around the full-text search feature to improve
+<br>
+accuracy and performance of the search
+<br>
+* Several fixes and performance improvements in several array functions
+<br>
+* Several fixes around the interaction of foreign-key constraints with
+<br>
+trigger functions around specific ALTER TABLE operations
+<br>
+* Remove optimizations for date/time data types that returned incorrect data
+<br>
+* Fix incorrect use of view reloptions as regular table reloptions
+<br>
+* Fix incorrect "target lists can have at most N entries"  complaint
+<br>
+when using ON CONFLICT with wide tables
+<br>
+* Fix spurious "query provides a value for a dropped column"  errors
+<br>
+during INSERT or UPDATE on a table with a dropped column
+<br>
+* Prevent multicolumn expansion of foo.* in an UPDATE source expression
+<br>
+* Ensure that column typmods are determined accurately for multi-row
+<br>
+VALUES constructs
+<br>
+* Several fixes for the psql command-line tool
+<br>
+* Prevent multiple calls of pg_start_backup() and pg_stop_backup()
+<br>
+from running concurrently
+<br>
+* Several fixes for pg_dump, pg_restore, and pg_basebackup, including
+<br>
+a possible pg_basebackup failure on standby server when including WAL
+<br>
+files
+<br>
+* Several fixes for parallel workers and plans for parallel queries
+<br>
+including fixing a crash if the number of workers available to a
+<br>
+parallel query decreases during a rescan
+<br>
+* Several fixes to PL/pgSQL, PL/Python, and PL/Tcl
+<br>
+* Several fixes for contrib modules
+<br>
+* Allow DOS-style line endings in ~/.pgpass files, even on Unix
+<br>
+
+<br>
+Update time zone data files to tzdata release 2016j for DST law
+<br>
+changes in northern Cyprus (adding a new zone Asia/Famagusta), Russia
+<br>
+(adding a new zone Europe/Saratov), Tonga, and Antarctica/Casey.
+<br>
+Historical corrections for Italy, Kazakhstan, Malta, and Palestine.
+<br>
+Switch to preferring numeric zone abbreviations for Tonga.
+<br>
+
+<br>
+Updating
+<br>
+--------
+<br>
+
+<br>
+All PostgreSQL update releases are cumulative. As with other minor
+<br>
+releases, users are not required to dump and reload their database or
+<br>
+use pg_upgrade in order to apply this update release; you may simply
+<br>
+shut down PostgreSQL and update its binaries.
+<br>
+
+<br>
+If you believe you have been affected by the aforementioned CREATE
+<br>
+INDEX CONCURRENTLY bug, you will have to rebuild the index.  Here is
+<br>
+an example of how to rebuild an index in a production system without
+<br>
+losing the ability to utilize the index:
+<br>
+
+<br>
+    CREATE INDEX CONCURRENTLY new_index_name ON table_name (column_name);
+<br>
+    DROP INDEX CONCURRENTLY old_index_name;
+<br>
+    ALTER INDEX new_index_name RENAME TO old_index_name;
+<br>
+
+<br>
+Note that using this method means you will briefly have two copies of
+<br>
+the same index, so if disk space is an issue you may need to take
+<br>
+other approaches.
+<br>
+
+<br>
+Users who have skipped one or more update releases may need to run
+<br>
+additional, post-update steps; please see the release notes for
+<br>
+earlier versions for details.
+<br>
+
+<br>
+Links:
+<br>
+* Download: http://www.postgresql.org/download
+<br>
+* Release Notes: http://www.postgresql.org/docs/current/static/release.html
+<br>
+* Security Page: http://www.postgresql.org/support/security/
+<br>
+* Versioning Policy: https://www.postgresql.org/support/versioning/
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Dave Page
+<br>
+PostgreSQL Core Team
+<br>
+http://www.postgresql.org/
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a13f28d7b0f401">Tread: 15a13f28d7b0f401</h3></a>
+<em>Mon, 06 Feb 2017 15:01:54 +0000</em>
+<h4>[ANNOUNCE] Apache Solr 6.4.1 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		Adrien Grand <jpountz@apache.org></p>
+<p class="message">6 February 2017, Apache Solr=E2=84=A2 6.4.1 available
+<br>
+
+<br>
+The Lucene PMC is pleased to announce the release of Apache Solr 6.4.1
+<br>
+Solr is the popular, blazing fast, open source NoSQL search platform
+<br>
+from the Apache Lucene project. Its major features include powerful
+<br>
+full-text search, hit highlighting, faceted search and analytics, rich
+<br>
+document parsing, geospatial search, extensive REST APIs as well as
+<br>
+parallel SQL. Solr is enterprise grade, secure and highly scalable,
+<br>
+providing fault tolerant distributed search and indexing, and powers
+<br>
+the search and navigation features of many of the world's largest
+<br>
+internet sites.Solr 6.4.1 is available for immediate download at:
+<br>
+  http://lucene.apache.org/solr/mirrors-solr-latest-redir.htmlPlease
+<br>
+read CHANGES.txt for a full list of new features and changes:
+<br>
+  https://lucene.apache.org/solr/6_4_1/changes/Changes.htmlSolr 6.4.1
+<br>
+contains 5 bug fixes since the 6.4.0 release: * "Plugin/Stats" section
+<br>
+of the UI doesn't display empty metric types * SOLR_SSL_OPTS was
+<br>
+mistakenly overwritten in solr.cmd * Better validation of filename
+<br>
+params in ReplicationHandler * Core swapping did not work with new
+<br>
+metrics changes in place * Admin UI could not find DataImport handlers
+<br>
+due to metrics changes * AnalyzingInfixSuggester/BlendedInfixSuggester
+<br>
+now work with core reloadFurther details of changes are available in
+<br>
+the change log available at:
+<br>
+http://lucene.apache.org/solr/6_4_1/changes/Changes.htmlPlease report
+<br>
+any feedback to the mailing lists
+<br>
+(http://lucene.apache.org/solr/discussion.html)Note: The Apache
+<br>
+Software Foundation uses an extensive mirroring network for
+<br>
+distributing releases. It is possible that the mirror you are using
+<br>
+may not have replicated the release yet. If that is the case, please
+<br>
+try another mirror. This also applies to Maven access.
+<br>
+
+<br>
+--=20
+<br>
+Adrien
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15a044bab60cfc8e">Tread: 15a044bab60cfc8e</h3></a>
+<em>Fri,  3 Feb 2017 22:40:34 +0900 (JST)</em>
+<h4>[ANNOUNCE] psqlODBC 09.06.0100 Released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Hiroshi Saito <hiroshi@winpg.jp></p>
+<p class="message">Hi, all.
+<br>
+
+<br>
+We are release of psqlODBC 09.06.0100. 
+<br>
+please see the notes at:
+<br>
+https://odbc.postgresql.org/docs/release.html
+<br>
+
+<br>
+psqlODBC may be downloaded from in source, Windows Installer,
+<br>
+merge module, and basic zip file formats.
+<br>
+
+<br>
+New Windows installer installs both 32-bit and 64-bit driver at once
+<br>
+on 64-bit OS. Both drivers may be needed on 64-bit OS because 32-bit
+<br>
+applications require 32-bit driver and 64-bit applications require
+<br>
+64-bit driver.
+<br>
+
+<br>
+Please post any bug reports to the  mailing list.
+<br>
+
+<br>
+I'd like to take this opportunity to thank all those involved with the
+<br>
+development, testing and bug fixing of the updated driver.
+<br>
+
+<br>
+We are grateful to the help of many peoples. Thanks!
+<br>
+
+<br>
+-- 
+<br>
+psqlODBC team.
+<br>
+email:   pgsql-odbc@postgresql.org
+<br>
+website: https://odbc.postgresql.org/
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="159f3503380b3942">Tread: 159f3503380b3942</h3></a>
+<em>Tue, 31 Jan 2017 01:57:11 -0500</em>
+<h4>[postgis-users] PostGIS 2.3.2 is released</h4><p>List:		postgis-users@lists.osgeo.org</p>
+<p>From:		Regina Obe <lr@pcorp.us></p>
+<p class="message">VGhlIFBvc3RHSVMgZGV2ZWxvcG1lbnQgdGVhbSBpcyBwbGVhc2VkIHRvIGFubm91bmNlIHRoZSBy
+<br>
+ZWxlYXNlIG9mIFBvc3RHSVMKMi4zLjIgCkFzIGJlZml0cyBhIHBhdGNoIHJlbGVhc2UsIHRoZSBm
+<br>
+b2N1cyBpcyBvbiBidWdzIGFuZCBicmVha2FnZXMuCkJlc3Qgc2VydmVkIHdpdGggUG9zdGdyZVNR
+<br>
+TCA5LjYuMSsKaHR0cHM6Ly93d3cucG9zdGdyZXNxbC5vcmcvYWJvdXQvbmV3cy8xNzEyLwphbmQg
+<br>
+cGdSb3V0aW5nIDIuMy4yCmh0dHBzOi8vbGlzdHMub3NnZW8ub3JnL3BpcGVybWFpbC9wZ3JvdXRp
+<br>
+bmctdXNlcnMvMjAxNy1KYW51YXJ5LzAwMjMwNC5odG1sIAoKWW91IGNhbiBkb3dubG9hZCBzb3Vy
+<br>
+Y2UgYW5kIGRvY3VtZW50YXRpb24gZnJvbSB0aGUgZm9sbG93aW5nIGxpbmtzOgoKU291cmNlOiBo
+<br>
+dHRwOi8vZG93bmxvYWQub3NnZW8ub3JnL3Bvc3RnaXMvc291cmNlL3Bvc3RnaXMtMi4yLjUudGFy
+<br>
+Lmd6CkhUTUwgZG9jczogaHR0cDovL2Rvd25sb2FkLm9zZ2VvLm9yZy9wb3N0Z2lzL2RvY3MvZG9j
+<br>
+LWh0bWwtMi4yLjUudGFyLmd6ClBERiBEb2NzOiBodHRwOi8vZG93bmxvYWQub3NnZW8ub3JnL3Bv
+<br>
+c3RnaXMvZG9jcy9wb3N0Z2lzLTIuMi41LnBkZgpFUFVCIERvY3M6IGh0dHA6Ly9kb3dubG9hZC5v
+<br>
+c2dlby5vcmcvcG9zdGdpcy9kb2NzL3Bvc3RnaXMtMi4yLjUuZXB1YgpDaGFuZ2VMb2c6IGh0dHBz
+<br>
+Oi8vc3ZuLm9zZ2VvLm9yZy9wb3N0Z2lzL3RhZ3MvMi4yLjUvQ2hhbmdlTG9nCgoKUGxlYXNlIGh0
+<br>
+dHA6Ly9wb3N0Z2lzLm5ldC9zdXBwb3J0IHJlcG9ydCBidWdzIHRoYXQgeW91IGZpbmQgaW4gdGhp
+<br>
+cyByZWxlYXNlCgpCdWcgRml4ZXMgYW5kIEltcHJvdmVtZW50cwoKMzQxOCwgS05OIHJlY2hlY2sg
+<br>
+aW4gOS41KyBmYWlscyB3aXRoIGluZGV4IHJldHVybmVkIHR1cGxlcyBpbiB3cm9uZyBvcmRlciAK
+<br>
+aHR0cHM6Ly90cmFjLm9zZ2VvLm9yZy9wb3N0Z2lzL3RpY2tldC8zNDE4CgozNjc1LCBSZWxhdGlv
+<br>
+bnNoaXAgZnVuY3Rpb25zIG5vdCB1c2luZyBhbiBpbmRleCBpbiBzb21lIGNhc2VzCmh0dHBzOi8v
+<br>
+dHJhYy5vc2dlby5vcmcvcG9zdGdpcy90aWNrZXQvMzY3NQoKMzY4MCwgUG9zdEdJUyB1cGdyYWRl
+<br>
+IHNjcmlwdHMgbWlzc2luZyBHUkFOVCBmb3Igdmlld3MgIApodHRwczovL3RyYWMub3NnZW8ub3Jn
+<br>
+L3Bvc3RnaXMvdGlja2V0LzM2ODAKCjM2ODMsIFVuYWJsZSB0byB1cGRhdGUgcG9zdGdpcyBhZnRl
+<br>
+ciBwb3N0Z3JlcyBwZ191cGdyYWRlIGdvaW5nIGZyb20gPCA5LjUgdG8KcGcgPiA5LjQKaHR0cHM6
+<br>
+Ly90cmFjLm9zZ2VvLm9yZy9wb3N0Z2lzL3RpY2tldC8zNjgzCgozNjg4LCBTVF9Bc0xhdExvblRl
+<br>
+eHQ6IHJvdW5kIG1pbnV0ZXMKaHR0cHM6Ly90cmFjLm9zZ2VvLm9yZy9wb3N0Z2lzL3RpY2tldC8z
+<br>
+Njg4CgoKV2FybSByZWdhcmRzLApQb3N0R0lTIERldmVsb3BtZW50IFRlYW0KCl9fX19fX19fX19f
+<br>
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCnBvc3RnaXMtdXNlcnMgbWFpbGlu
+<br>
+ZyBsaXN0CnBvc3RnaXMtdXNlcnNAbGlzdHMub3NnZW8ub3JnCmh0dHBzOi8vbGlzdHMub3NnZW8u
+<br>
+b3JnL21haWxtYW4vbGlzdGluZm8vcG9zdGdpcy11c2Vycw==
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="159f085105daa268">Tread: 159f085105daa268</h3></a>
+<em>Mon, 30 Jan 2017 18:48:05 +0100</em>
+<h4>[ANNOUNCE] Ora2Pg v18.0 was released today</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Gilles Darold <gilles.darold@dalibo.com></p>
+<p class="message">Paris, France - January 30th, 2017
+<br>
+
+<br>
+**Ora2Pg 18.0 released**
+<br>
+
+<br>
+Version 18.0 of Ora2Pg, a free and reliable tool used to migrate an
+<br>
+Oracle database to PostgreSQL, has been officially released and is
+<br>
+publicly available for download.
+<br>
+
+<br>
+This new major release adds several new useful features and lot of
+<br>
+improvements.
+<br>
+
+<br>
+  * Automatic rewrite of simple form of (+) outer join Oracle's
+<br>
+    syntax. This major feature makes Ora2Pg become the first free
+<br>
+    tool that is able to rewrite automatically some (+) outer join
+<br>
+    in command line mode. It works with simple form of outer join
+<br>
+    but this is a beginning.
+<br>
+  * Add export of Oracle's virtual column using a real column and
+<br>
+    a trigger.
+<br>
+  * Allow conversion of RAW/CHAR/VARCHAR2 type with precision in
+<br>
+    DATA_TYPE directive. Useful for example to transform all RAW(32)
+<br>
+    or VARCHAR2(32) columns into PostgreSQL special type uuid.
+<br>
+  * Add export NOT VALIDATED state from Oracle foreign keys and check
+<br>
+    constraints into NOT VALID constraints in PostgreSQL.
+<br>
+  * Replace call to SYS_GUID() with uuid_generate_v4() by default.
+<br>
+  * Add "CREATE EXTENSION IF NOT EXISTS dblink;" before an autonomous
+<br>
+    transaction or "CREATE EXTENSION IF NOT EXISTS pg_background;".
+<br>
+  * Major rewrite of the way Ora2Pg parse PL/SQL to rewrite function
+<br>
+    calls and other PL/SQL to plpgsql replacement. There should not
+<br>
+    be any limitation in rewriting when a function contains a sub
+<br>
+    query or an other function call inside his parameters.
+<br>
+  * Refactoring of ora2pg to not requires any dependency other than
+<br>
+    the Perl DBI module by default. All DBD drivers are now optionals
+<br>
+    and ora2pg will expect an Oracle DDL file as input by default.
+<br>
+  * Add export of Oracle's global variables defined in package. They
+<br>
+    are exported as user defined custom variables and available in
+<br>
+    a session. If the variable is a constant or have a default value
+<br>
+    assigned at declaration, ora2pg will create a new file with the
+<br>
+    declaration (global_variables.conf) to be included in the main
+<br>
+    configuration file postgresql.conf file.
+<br>
+  * Create full text search configuration when USE_UNACCENT directive
+<br>
+    is enabled using the auto detected stemmer or the one defined in
+<br>
+    FTS_CONFIG. For example:
+<br>
+      CREATE TEXT SEARCH CONFIGURATION fr (COPY = french);
+<br>
+        ALTER TEXT SEARCH CONFIGURATION fr ALTER MAPPING FOR
+<br>
+            hword, hword_part, word WITH unaccent, french_stem;
+<br>
+        CREATE INDEX place_notes_cidx ON places
+<br>
+                USING gin(to_tsvector('fr', place_notes));
+<br>
+   
+<br>
+Changes and incompatibilities from previous release:
+<br>
+
+<br>
+  * FTS_INDEX_ONLY is now enabled by default because the addition of
+<br>
+    a column is not always possible and not always necessary where a
+<br>
+    simple function-based index is enough.
+<br>
+  * Remove use to setweigth() on single column FTS based indexes.
+<br>
+  * Change default behaviour of Ora2Pg in Full Text Search index
+<br>
+    export.
+<br>
+
+<br>
+A new command line option and some configuration directive have
+<br>
+been added:
+<br>
+
+<br>
+  * Option -D | --data_type to allow custom data type replacement
+<br>
+    at command line like in configuration file with DATA_TYPE.
+<br>
+  * UUID_FUNCTION to be able to redefined the function called to
+<br>
+    replace SYS_GUID() Oracle function. Default to uuid_generate_v4.
+<br>
+  * REWRITE_OUTER_JOIN to be able to disable the rewriting of Oracle
+<br>
+    native syntax (+) into OUTER JOIN if rewritten code is broken.
+<br>
+  * USE_UNACCENT and USE_LOWER_UNACCENT configuration directives to
+<br>
+    use the unaccent extension with pg_trgm with the FTS indexes.
+<br>
+  * FTS_INDEX_ONLY, by default Ora2Pg creates an extra tsvector column
+<br>
+    with a dedicated triggers for FTS indexes. Enable this directive
+<br>
+    if you just want a function-based index like:
+<br>
+    CREATE INDEX ON t_document USING
+<br>
+        gin(to_tsvector('pg_catalog.english', title));
+<br>
+  * FTS_CONFIG, use this directive to force the text search stemmer
+<br>
+    used with the to_tsvector() function. Default is to auto detect
+<br>
+    the Oracle FTS stemmer. For example, setting FTS_CONFIG to
+<br>
+    pg_catalog.english or pg_catalog.french will override the auto
+<br>
+    detected stemmer.
+<br>
+
+<br>
+Thanks to all contributors, they are all cited in the changelog file.
+<br>
+
+<br>
+Useful Links:
+<br>
+
+<br>
+    - Website: http://ora2pg.darold.net/
+<br>
+    - Download: http://sourceforge.net/projects/ora2pg/
+<br>
+    - Development: https://github.com/darold/ora2pg
+<br>
+    - Changelog: https://github.com/darold/ora2pg/blob/master/changelog
+<br>
+    - Documentation: https://github.com/darold/ora2pg/blob/master/README
+<br>
+
+<br>
+About Ora2Pg :
+<br>
+
+<br>
+Ora2Pg is an easy and reliable tool to migrate from Oracle to PostgreSQL.
+<br>
+It is developed since 2001 and can export most of the Oracle objects
+<br>
+(table, view, materialized view, tablespace, sequence, indexes, trigger,
+<br>
+grant, function, procedure, package, partition, data, blob and external
+<br>
+table).
+<br>
+
+<br>
+Ora2Pg works on any platform and is available under the GPL v3 licence.
+<br>
+
+<br>
+Docs, Download & Support at http://ora2pg.darold.net/
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Gilles Darold
+<br>
+Consultant PostgreSQL
+<br>
+http://dalibo.com - http://dalibo.org
+<br>
+
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="159eda5f6ee7de57">Tread: 159eda5f6ee7de57</h3></a>
+<em>Sun, 29 Jan 2017 23:33:07 -0500</em>
+<h4>[postgis-users] PostGIS 2.2.5 is released</h4><p>List:		postgis-users@lists.osgeo.org</p>
+<p>From:		Regina Obe <lr@pcorp.us></p>
+<p class="message">VGhlIFBvc3RHSVMgZGV2ZWxvcG1lbnQgdGVhbSBpcyBwbGVhc2VkIHRvIGFubm91bmNlIHRoZSBy
+<br>
+ZWxlYXNlIG9mIFBvc3RHSVMKMi4yLjUgCkFzIGJlZml0cyBhIHBhdGNoIHJlbGVhc2UsIHRoZSBm
+<br>
+b2N1cyBpcyBvbiBidWdzIGFuZCBicmVha2FnZXMuCgpZb3UgY2FuIGRvd25sb2FkIHNvdXJjZSBh
+<br>
+bmQgZG9jdW1lbnRhdGlvbiBmcm9tIHRoZSBmb2xsb3dpbmcgbGlua3M6CgpTb3VyY2U6IGh0dHA6
+<br>
+Ly9kb3dubG9hZC5vc2dlby5vcmcvcG9zdGdpcy9zb3VyY2UvcG9zdGdpcy0yLjIuNS50YXIuZ3oK
+<br>
+SFRNTCBkb2NzOiBodHRwOi8vZG93bmxvYWQub3NnZW8ub3JnL3Bvc3RnaXMvZG9jcy9kb2MtaHRt
+<br>
+bC0yLjIuNS50YXIuZ3oKUERGIERvY3M6IGh0dHA6Ly9kb3dubG9hZC5vc2dlby5vcmcvcG9zdGdp
+<br>
+cy9kb2NzL3Bvc3RnaXMtMi4yLjUucGRmCkVQVUIgRG9jczogaHR0cDovL2Rvd25sb2FkLm9zZ2Vv
+<br>
+Lm9yZy9wb3N0Z2lzL2RvY3MvcG9zdGdpcy0yLjIuNS5lcHViCkNoYW5nZUxvZzogaHR0cHM6Ly9z
+<br>
+dm4ub3NnZW8ub3JnL3Bvc3RnaXMvdGFncy8yLjIuNS9DaGFuZ2VMb2cKCgpQbGVhc2UgaHR0cDov
+<br>
+L3Bvc3RnaXMubmV0L3N1cHBvcnQgcmVwb3J0IGJ1Z3MgdGhhdCB5b3UgZmluZCBpbiB0aGlzIHJl
+<br>
+bGVhc2UKCkJ1ZyBGaXhlcyBhbmQgSW1wcm92ZW1lbnRzCgozNDE4LCBLTk4gcmVjaGVjayBpbiA5
+<br>
+LjUrIGZhaWxzIHdpdGggaW5kZXggcmV0dXJuZWQgdHVwbGVzIGluIHdyb25nIG9yZGVyIApodHRw
+<br>
+czovL3RyYWMub3NnZW8ub3JnL3Bvc3RnaXMvdGlja2V0LzM0MTgKCjM2ODAsIFBvc3RHSVMgdXBn
+<br>
+cmFkZSBzY3JpcHRzIG1pc3NpbmcgR1JBTlQgZm9yIHZpZXdzICAKaHR0cHM6Ly90cmFjLm9zZ2Vv
+<br>
+Lm9yZy9wb3N0Z2lzL3RpY2tldC8zNjgwCgoKUG9zdEdJUyAyLjMuMiB3aWxsIGJlIGNvbWluZyBv
+<br>
+dXQgaW4gdGhlIG5leHQgZGF5IG9yIDIuCgpXYXJtIHJlZ2FyZHMsClBvc3RHSVMgRGV2ZWxvcG1l
+<br>
+bnQgVGVhbQoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+<br>
+X18KcG9zdGdpcy11c2VycyBtYWlsaW5nIGxpc3QKcG9zdGdpcy11c2Vyc0BsaXN0cy5vc2dlby5v
+<br>
+cmcKaHR0cHM6Ly9saXN0cy5vc2dlby5vcmcvbWFpbG1hbi9saXN0aW5mby9wb3N0Z2lzLXVzZXJz
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="159d4ffa07f3ddd2">Tread: 159d4ffa07f3ddd2</h3></a>
+<em>Wed, 25 Jan 2017 11:35:35 +0200</em>
+<h4>[ANN] Apache Tomcat 7.0.75 released</h4><p>List:		announce@tomcat.apache.org</p>
+<p>From:		Violeta Georgieva <violetagg@apache.org></p>
+<p class="message"><div dir=3D"ltr">The Apache Tomcat team announces the immediate availabilit=
+<br>
+y of Apache<br>Tomcat 7.0.75.<br><br>Apache Tomcat is an open source softwa=
+<br>
+re implementation of the Java<br>Servlet, JavaServer Pages, Java Expression=
+<br>
+ Language and Java<br>WebSocket technologies.<br><br>This release contains =
+<br>
+a number of bug fixes and improvements compared to<br>version 7.0.73. The n=
+<br>
+otable changes since 7.0.73 include:<br><br><br>- Add support for varargs i=
+<br>
+n UEL expressions<br><br>- Ensure that the endpoint is able to unlock the a=
+<br>
+cceptor thread during<div>=C2=A0 shutdown if the endpoint is configured to =
+<br>
+listen to any local address of</div><div>=C2=A0 a specific type such as 0.0=
+<br>
+.0.0 or ::<br><br><br>Please refer to the change log for the complete list =
+<br>
+of changes:<br><a href=3D"http://tomcat.apache.org/tomcat-7.0-doc/changelog=
+<br>
+.html">http://tomcat.apache.org/tomcat-7.0-doc/changelog.html</a><br><br>Do=
+<br>
+wnloads:<br><a href=3D"http://tomcat.apache.org/download-70.cgi">http://tom=
+<br>
+cat.apache.org/download-70.cgi</a><br><br>Migration guides from Apache Tomc=
+<br>
+at 5.5.x and 6.0.x:<br><a href=3D"http://tomcat.apache.org/migration.html">=
+<br>
+http://tomcat.apache.org/migration.html</a><br><br>Enjoy<br><br>The Apache =
+<br>
+Tomcat team<br></div></div>
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="159d0d042f6d0d5d">Tread: 159d0d042f6d0d5d</h3></a>
+<em>Tue, 24 Jan 2017 15:02:54 +0100</em>
+<h4>[ANNOUNCE] pgBadger v9.1 has been released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Gilles Darold <gilles.darold@dalibo.com></p>
+<p class="message">Paris, France - January 24th, 2017
+<br>
+
+<br>
+pgBadger is a PostgreSQL performance analyzer, built for speed with
+<br>
+fully detailed reports based on your PostgreSQL log files.
+<br>
+
+<br>
+pgBadger 9.1 was released today, this is a maintenance release that
+<br>
+fix some minor bugs. There is also a new report on error class
+<br>
+distribution and some feature enhancements:
+<br>
+
+<br>
+  * Add report of error class distribution when SQLState is available
+<br>
+    in the log_line_prefix (see %e placeholder).
+<br>
+  * Update SQL Beautifier to pgFormatter v1.6 code.
+<br>
+  * Improve error message normalization.
+<br>
+  * Add --normalized-only option to generate a text file containing all
+<br>
+    normalized queries found in a log with count.
+<br>
+  * Allow %c (session id) to replace %p (pid) as unique session id.
+<br>
+  * Add waiting for lock messages to event reports.
+<br>
+  * Add --start-monday option to start calendar weeks in Monday
+<br>
+    instead of default to Sunday.
+<br>
+
+<br>
+Here are the complete list of changes:
+<br>
+
+<br>
+  - Add report of error class distribution when SQLState is available
+<br>
+    in the log line prefix. Thanks to jacks33 for the feature request.
+<br>
+  - Fix incremental global index on resize. Thanks to clomdd for the
+<br>
+    report.
+<br>
+  - Fix command tag log_line_prefix placeholder %i to allow space
+<br>
+    character.
+<br>
+  - Fix --exclude-line options and removing of obsolete directory
+<br>
+    when retention is enabled and --noreport is used.
+<br>
+  - Fix typo in "vacuum activity table". Thanks to Nicolas Gollet for
+<br>
+    the patch.
+<br>
+  - Fix autovacuum report. Thanks to Nicolas Gollet for the patch.
+<br>
+  - Fix author of pgbadger's logo - Damien Cazeils and English in
+<br>
+    comments. Thanks to Thibaut Madelaine for the patch.
+<br>
+  - Add information about pgbouncer log format in the -f option.
+<br>
+    Thanks to clomdd for the report.
+<br>
+  - Add --normalized-only information in documentation.
+<br>
+  - Fix broken report of date-time introduced in previous patch.
+<br>
+  - Fix duration/query association when log_duration=on and
+<br>
+    log_statement=all. Thanks to Eric Jensen for the report.
+<br>
+  - Fix normalization of messages about advisory lock. Thanks to
+<br>
+    Thibaut Madelaine for the report.
+<br>
+  - Fix report of auto_explain output. Thanks to fch77700 for the
+<br>
+    report.
+<br>
+  - Fix unwanted log format auto detection with log entry from stdin.
+<br>
+    Thanks to Jesus Adolfo Parra for the report.
+<br>
+  - Add left open parentheses to the "stop" chars of regex to look
+<br>
+    for db client in the prefix to handle the PostgreSQL client
+<br>
+    string format that includes source port. Thanks to Jon Nelson
+<br>
+    for the patch.
+<br>
+  - Fix some spelling errors. Thanks to Jon Nelson for the patch.
+<br>
+  - Allow %c (session id) to replace %p (pid) as unique session id.
+<br>
+    Thanks to Jerryliuk for the report.
+<br>
+  - Allow pgBadger to parse default log_line_prefix that will be
+<br>
+    probably used in 10.0: '%m [%p] '
+<br>
+  - Fix missing first line with interpreter call.
+<br>
+  - Fix missing Avg values in CSV report. Thanks to Yosuke Tomita
+<br>
+    for the report.
+<br>
+  - Fix error message in autodetect_format() method.
+<br>
+  - Add --start-monday option to start calendar weeks in Monday
+<br>
+    instead of default to Sunday. Thanks to Joosep Mae for the feature
+<br>
+    request.
+<br>
+  - Fix --histo-average option. Thanks to Yves Martin for the report.
+<br>
+  - Remove plural form of --ssh-option in documentation. Thanks to
+<br>
+    mark-a-s for the report.
+<br>
+  - Fix --exclude-time filter and rewrite code to skip unwanted line
+<br>
+    as well code to update the progress bar. Thanks to Michael
+<br>
+    Chesterton for the report.
+<br>
+  - Fix support to %r placeholder in prefix instead of %h.
+<br>
+
+<br>
+===== Links & Credits =====
+<br>
+
+<br>
+DALIBO would like to thank the developers who submitted patches and the
+<br>
+users who reported bugs and feature requests.
+<br>
+
+<br>
+pgBadger is an open project. Any contribution to build a better tool is
+<br>
+welcome. You just have to send your ideas, features requests or patches
+<br>
+using the GitHub tools or directly on our mailing list.
+<br>
+
+<br>
+Links :
+<br>
+
+<br>
+  * Download : https://github.com/dalibo/pgbadger/releases/
+<br>
+  * Mailing List :
+<br>
+https://groups.google.com/forum/?hl=fr#!forum/pgbadger
+<br>
+(pgbadger@googlegroups.com)
+<br>
+
+<br>
+--------------
+<br>
+
+<br>
+**About pgBadger** :
+<br>
+
+<br>
+pgBagder is a new generation log analyzer for PostgreSQL, created by
+<br>
+Gilles Darold (also author of ora2pg, the powerful migration tool).
+<br>
+pgBadger is a fast and easy tool to analyze your SQL traffic and create
+<br>
+HTML5 reports with dynamics graphs. pgBadger is the perfect tool to
+<br>
+understand the behavior of your PostgreSQL servers and identify which
+<br>
+SQL queries need to be optimized.
+<br>
+
+<br>
+Docs, Download & Demo at http://dalibo.github.io/pgbadger/
+<br>
+
+<br>
+--------------
+<br>
+
+<br>
+**About DALIBO** :
+<br>
+
+<br>
+DALIBO is the leading PostgreSQL company in France, providing support,
+<br>
+trainings and consulting to its customers since 2005. The company
+<br>
+contributes to the PostgreSQL community in various ways, including :
+<br>
+code, articles, translations, free conferences and workshops
+<br>
+
+<br>
+Check out DALIBO's open source projects at http://dalibo.github.io
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Gilles Darold
+<br>
+Consultant PostgreSQL
+<br>
+http://dalibo.com - http://dalibo.org
+<br>
+
+<br>
+
+<br>
+
+<br>
+-- 
+<br>
+Sent via pgsql-announce mailing list (pgsql-announce@postgresql.org)
+<br>
+To make changes to your subscription:
+<br>
+http://www.postgresql.org/mailpref/pgsql-announce
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="159ca9e0ae066735">Tread: 159ca9e0ae066735</h3></a>
+<em>Mon, 23 Jan 2017 10:17:37 +0100</em>
+<h4>[ANNOUNCE] Apache Solr 6.4.0 released</h4><p>List:		solr-user@lucene.apache.org</p>
+<p>From:		jim ferenczi <jim.ferenczi@gmail.com></p>
+<p class="message">23 January 2016 - Apache Solr=E2=84=A2 6.4.0 Available
+<br>
+The Lucene PMC is pleased to announce the release of Apache Solr 6.4.0.
+<br>
+
+<br>
+Solr is the popular, blazing fast, open source NoSQL search platform from
+<br>
+the Apache Lucene project. Its major features include powerful full-text
+<br>
+search, hit highlighting, faceted search and analytics, rich document
+<br>
+parsing, geospatial search, extensive REST APIs as well as parallel SQL.
+<br>
+Solr is enterprise grade, secure and highly scalable, providing fault
+<br>
+tolerant distributed search and indexing, and powers the search and
+<br>
+navigation features of many of the world's largest internet sites.
+<br>
+
+<br>
+Solr 6.4.0 is available for immediate download at:
+<br>
+http://lucene.apache.org/solr/mirrors-solr-latest-redir.html
+<br>
+
+<br>
+Highlights of this Solr release include:
+<br>
+
+<br>
+Streaming:
+<br>
+  * Addition of a HavingStream to Streaming API and Streaming Expressions
+<br>
+  * Addition of a priority Streaming Expression
+<br>
+  * Streaming expressions now support collection aliases
+<br>
+
+<br>
+Machine Learning:
+<br>
+  * Configurable Learning-To-Rank (LTR) support: upload feature
+<br>
+definitions, extract feature values, upload your own machine learnt models
+<br>
+and use them to rerank search results.
+<br>
+
+<br>
+Faceting:
+<br>
+  * Added "param" query type to facet domain filter specification to obtain
+<br>
+filters via query parameters
+<br>
+  * Any facet command can be filtered using a new parameter filter.
+<br>
+Example: { type:terms, field:category, filter:"user:yonik" }
+<br>
+
+<br>
+Scripts / Command line:
+<br>
+  * A new command-line tool to manage the snapshots functionality
+<br>
+  * bin/solr and bin/solr.cmd now use mkroot command
+<br>
+
+<br>
+SolrCloud / SolrJ
+<br>
+  * LukeResponse now supports dynamic fields
+<br>
+  * Solrj client now supports hierarchical clusters and other topics marker
+<br>
+  * Collection backup/restore are extensible.
+<br>
+
+<br>
+Security:
+<br>
+  * Support Secure Impersonation / Proxy User for Solr authentication
+<br>
+  * Key Store type can be specified in solr.in.sh file for SSL
+<br>
+  * New generic authentication plugins: 'HadoopAuthPlugin' and
+<br>
+'ConfigurableInternodeAuthHadoopPlugin' that delegate all functionality to
+<br>
+Hadoop authentication framework
+<br>
+
+<br>
+Query / QueryParser / Highlighting:
+<br>
+  * A new highlighter: The Unified Highlighter. Try it via
+<br>
+hl.method=3Dunified; many popular highlighting parameters / features are
+<br>
+supported. It's the highest performing highlighter, especially for large
+<br>
+documents. Highlighting phrase queries and exotic queries are supported
+<br>
+equally as well as the Original Highlighter (aka the default/standard one).
+<br>
+Please use this new highlighter and report issues since it will likely
+<br>
+become the default one day.
+<br>
+  * Leading wildcard in complexphrase query parser are now accepted and
+<br>
+optimized with the ReversedWildcardFilterFactory when it's provided
+<br>
+
+<br>
+Metrics:
+<br>
+  * Use metrics-jvm library to instrument jvm internals such as GC, memory
+<br>
+usage and others.
+<br>
+  * A lot of metrics have been added to the collection: index merges, index
+<br>
+store I/Os, query, update, core admin, core load thread pools, shard
+<br>
+replication, tlog replay and replicas
+<br>
+  * A new /admin/metrics API to return all metrics collected by Solr via
+<br>
+API.
+<br>
+
+<br>
+Misc changes:
+<br>
+  * The new config parameter 'maxRamMB'can now limit the memory consumed by
+<br>
+the FastLRUCache
+<br>
+  * A new document processor 'SkipExistingDocumentsProcessor' that skips
+<br>
+duplicate inserts and ignores updates to missing docs
+<br>
+  * FieldCache information fetched via the mbeans handler or seen via the
+<br>
+UI now displays the total size used.
+<br>
+  * A new config flag 'enable' allows to enable/disable any cache
+<br>
+
+<br>
+Please note, this release cannot be built from source with Java 8 update
+<br>
+121, use an earlier version instead! This is caused by a bug introduced
+<br>
+into the Javadocs tool shipped with that update. The workaround was too
+<br>
+late for this Lucene release. Of course, you can use the binary artifacts.
+<br>
+
+<br>
+See the Solr CHANGES.txt files included with the release for a full list of
+<br>
+details.
+<br>
+
+<br>
+Thanks,
+<br>
+Jim Ferenczi
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="159b20f3c1122c39">Tread: 159b20f3c1122c39</h3></a>
+<em>Wed, 18 Jan 2017 14:34:58 +0000</em>
+<h4>[mapserver-announce] MapServer 6.0.6, 6.2.4, 6.4.5 and 7.0.4 are released</h4><p>List:		mapserver-announce@lists.osgeo.org</p>
+<p>From:		"Lime, Steve D (MNIT)" <Steve.Lime@state.mn.us></p>
+<p class="message">X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KbWFwc2VydmVy
+<br>
+LWFubm91bmNlIG1haWxpbmcgbGlzdAptYXBzZXJ2ZXItYW5ub3VuY2VAbGlzdHMub3NnZW8ub3Jn
+<br>
+Cmh0dHBzOi8vbGlzdHMub3NnZW8ub3JnL21haWxtYW4vbGlzdGluZm8vbWFwc2VydmVyLWFubm91
+<br>
+bmNl
+<br>
+</p>
+<br><br><br><br>
+<hr><br><br><h3 id="15988dba8c7cbaab">Tread: 15988dba8c7cbaab</h3></a>
+<em>Tue, 10 Jan 2017 15:42:21 +0100</em>
+<h4>[ANNOUNCE] postgresql-unit 2.0 released</h4><p>List:		pgsql-announce@postgresql.org</p>
+<p>From:		Christoph Berg <christoph.berg@credativ.de></p>
+<p class="message">-----BEGIN PGP SIGNATURE-----
+<br>
+
+<br>
+iQIzBAABCAAdFiEEXEj+YVf0kXlZcIfGTFprqxLSp64FAlh08sUACgkQTFprqxLS
+<br>
+p67KCQ//ZXKHvtbiZpNdSBDz1x+sC7OsG5wnhSmKMXimJrHmtfjeg+JRgAdvBO1S
+<br>
+N6uDPXKYZj4vB24R7clb8f249cBv/hBCyoaY6Wv1miAviSCg0cu1qI6OJMmvw/So
+<br>
+3zMZihN4PIFFu3jh2vxRcSvWDvor4XKSbpomihzIbOX+sDdacY95sNXucV3OFiKz
+<br>
+ze6hOSndB1VbgUiJQTS3UQJEAfodAVoQi4Jo3fDMvp1DtU1aol3crf/3sld8jKNr
+<br>
+3qBpywO/2Vy25iJqJpIxEshbvnbXldJTOyeUerCiCxYcuDM6tmfrx8AnT9N/3lin
+<br>
+m7ngSUc/ikN1K7H7HaMOuJWrTJM2SKU3n7qdC4tUmZ5j9QkA0xPcPczPFeWhl++z
+<br>
+F9HWzkLHo5oF/jX+xwqVPA9IZovimMNzyFMZ4nzdnSe7ltdCn9WKNJg0cJx/b5vn
+<br>
+LZuTlCDAeQiCVy5e6l8lqgYmBppU0iiN5eeFTd6GXdaAvJw4vFakQfJQWKOHZulp
+<br>
+juUyy3Z4vs6+v0K0pFA+khhw9R/YYJa6u6mZ88zCHtaLffSoyiYtlctPFevGYeak
+<br>
+/F/gZfrpMj0ilq5MB0ckd8DHc+tH6uXgxV50LzEdKXnwmpHQuNshdvbId8t4g99E
+<br>
+b69W4e7A40ThRFP8OyQzIlmmHv8RXtcIifS2lbj24eEmBy5gtZU=
+<br>
+=zbrd
+<br>
+-----END PGP SIGNATURE-----
+<br>
+</p>
+<br><br><br><br>
+</div>
+</body>
+</html>
